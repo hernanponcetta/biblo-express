@@ -8,6 +8,7 @@ const books = require("./routes/books");
 const users = require("./routes/users");
 const genres = require("./routes/genres");
 const authors = require("./routes/authors");
+const publishers = require("./routes/publishers");
 
 mongoose.connect("mongodb://localhost/bibloDB", {
   useNewUrlParser: true,
@@ -28,6 +29,7 @@ app.use("/api/books", books);
 app.use("/api/users", users);
 app.use("/api/genres", genres);
 app.use("/api/authors", authors);
+app.use("/api/publishers", publishers);
 
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
