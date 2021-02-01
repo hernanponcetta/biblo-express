@@ -1,26 +1,35 @@
+const bcrypt = require("bcrypt");
+const _ = require("lodash");
 const { User, validate } = require("../models/user");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
+//Multiple user lookup
 router.get("/", async (req, res) => {
   res.send(await User.find());
 });
 
+//Single user create
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let user = new User({
-    firstName: req.body.firstName,
-    secondName: req.body.secondName,
-    eMail: req.body.eMail,
-  });
+  let user = await User.findOne({ eMail: req.body.eMail });
+  if (user) return res.status(400).send("El usuario ya existe");
 
-  user = await user.save();
-  res.send(user);
+  user = new User(
+    _.pick(req.body, ["firstName", "lastName", "eMail", "password"])
+  );
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
+
+  await user.save();
+
+  res.send(_.pick(user, ["_id", "firstName", "lastName"]));
 });
 
+//Single user update
 router.put("/:id", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -41,6 +50,7 @@ router.put("/:id", async (req, res) => {
   res.send(user);
 });
 
+//Single user delete
 router.delete("/:id", async (req, res) => {
   const user = await User.findByIdAndRemove(req.params.id);
 
@@ -50,6 +60,7 @@ router.delete("/:id", async (req, res) => {
   res.send(user);
 });
 
+//Single user lookup
 router.get("/:id", async (req, res) => {
   const user = await User.findById(req.params.id);
 

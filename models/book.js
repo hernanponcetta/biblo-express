@@ -63,11 +63,11 @@ const Book = mongoose.model(
 function validateBook(book) {
   const schema = Joi.object({
     title: Joi.string().min(5).max(255).required(),
-    authorId: Joi.string().min(5).max(255),
+    authorId: Joi.objectId().required(),
     price: Joi.number().min(0).required(),
-    publisherId: Joi.string().required(),
+    publisherId: Joi.objectId().required(),
     itemStock: Joi.number().min(0).max(255),
-    genreId: Joi.string().required(),
+    genreId: Joi.objectId().required(),
     isbn: Joi.number().min(0000000000000).max(9999999999999).required(),
     available: Joi.boolean().required(),
     bookCover: Joi.string(),

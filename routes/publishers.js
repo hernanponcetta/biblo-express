@@ -47,4 +47,14 @@ router.delete("/:id", async (req, res) => {
   res.send(publisher);
 });
 
+//Single publisher lookup
+router.get("/:id", async (req, res) => {
+  const publisher = await Publisher.findById(req.params.id);
+
+  if (!publisher)
+    return res.status(404).send("No se encontro ninguna editorial con es Id");
+
+  res.send(publisher);
+});
+
 module.exports = router;

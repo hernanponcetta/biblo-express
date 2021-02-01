@@ -1,6 +1,7 @@
 const { Book, validate } = require("../models/book");
 const { Genre } = require("../models/genre");
 const { Author } = require("../models/author");
+const { Publisher } = require("../models/publisher");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
@@ -21,6 +22,9 @@ router.post("/", async (req, res) => {
   const author = await Author.findById(req.body.authorId);
   if (!author) return res.status(400).send("No existe un autor con ese Id");
 
+  const publisher = await Publisher.findById(req.body.publisherId);
+  if (!author) return res.status(400).send("No existe un autor con ese Id");
+
   const book = new Book({
     title: req.body.title,
     author: {
@@ -28,7 +32,10 @@ router.post("/", async (req, res) => {
       name: author.name,
     },
     price: req.body.price,
-    publisher: req.body.publisher,
+    publisher: {
+      _id: publisher._id,
+      name: publisher.name,
+    },
     itemStock: req.body.itemStock,
     genre: {
       _id: genre._id,
@@ -63,7 +70,10 @@ router.put("/:id", async (req, res) => {
         name: author.name,
       },
       price: req.body.price,
-      publisher: req.body.publisher,
+      publisher: {
+        _id: publisher._id,
+        name: publisher.name,
+      },
       itemStock: req.body.itemStock,
       genre: {
         _id: genre._id,

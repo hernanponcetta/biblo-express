@@ -1,3 +1,5 @@
+const Joi = require("joi");
+Joi.objectId = require("joi-objectid")(Joi);
 const mongoose = require("mongoose");
 const config = require("config");
 const morgan = require("morgan");
@@ -9,6 +11,12 @@ const users = require("./routes/users");
 const genres = require("./routes/genres");
 const authors = require("./routes/authors");
 const publishers = require("./routes/publishers");
+const auth = require("./routes/auth");
+
+if (!config.get("jwtPrivateKey")) {
+  console.log("FATAL ERROR: jwtPrivateKey is not defined.");
+  process.exit(1);
+}
 
 mongoose.connect("mongodb://localhost/bibloDB", {
   useNewUrlParser: true,
@@ -30,6 +38,7 @@ app.use("/api/users", users);
 app.use("/api/genres", genres);
 app.use("/api/authors", authors);
 app.use("/api/publishers", publishers);
+app.use("/api/auth", auth);
 
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
