@@ -1,8 +1,11 @@
+const auth = require("../middleware/auth");
+const config = require("config");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const { User, validate } = require("../models/user");
 const mongoose = require("mongoose");
 const express = require("express");
+const { token } = require("morgan");
 const router = express.Router();
 
 //Multiple user lookup
@@ -26,7 +29,11 @@ router.post("/", async (req, res) => {
 
   await user.save();
 
-  res.send(_.pick(user, ["_id", "firstName", "lastName"]));
+  const token = user.generateAuthToken();
+
+  res
+    .header("x-auth-token", token)
+    .send(_.pick(user, ["_id", "firstName", "lastName"]));
 });
 
 //Single user update
@@ -47,6 +54,7 @@ router.put("/:id", async (req, res) => {
   if (!user)
     return res.status(404).send("No se encontro un usuario con ese Id.");
 
+  const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey"));
   res.send(user);
 });
 
@@ -61,11 +69,8 @@ router.delete("/:id", async (req, res) => {
 });
 
 //Single user lookup
-router.get("/:id", async (req, res) => {
-  const user = await User.findById(req.params.id);
-
-  if (!user)
-    return res.status(404).send("No se encontro un usuario con ese Id");
+router.get("/me", auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
 
   res.send(user);
 });
