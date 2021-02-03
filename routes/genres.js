@@ -6,7 +6,7 @@ const admin = require("../middleware/admin");
 const router = express.Router();
 
 //Multiple genres lookup
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   res.send(await Genre.find());
 });
 

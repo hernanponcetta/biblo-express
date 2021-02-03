@@ -1,3 +1,7 @@
+require("express-async-errors");
+const winston = require("winston");
+require("winston-mongodb");
+const error = require("./middleware/error");
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 const mongoose = require("mongoose");
@@ -12,6 +16,17 @@ const genres = require("./routes/genres");
 const authors = require("./routes/authors");
 const publishers = require("./routes/publishers");
 const auth = require("./routes/auth");
+
+const logger = winston.createLogger({
+  transports: [new winston.transports.File({ filename: "combined.log" })],
+  exceptionHandlers: [
+    new winston.transports.File({ filename: "exceptions.log" }),
+    new winston.transports.MongoDB({ db: "mongodb://localhost/bibloDB" }),
+  ],
+  exitOnError: false,
+});
+
+throw new Error("Algo salio mal");
 
 if (!config.get("jwtPrivateKey")) {
   console.log("FATAL ERROR: jwtPrivateKey is not defined.");
@@ -39,6 +54,8 @@ app.use("/api/genres", genres);
 app.use("/api/authors", authors);
 app.use("/api/publishers", publishers);
 app.use("/api/auth", auth);
+
+app.use(error);
 
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
