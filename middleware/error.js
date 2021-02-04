@@ -1,5 +1,7 @@
 const winston = require("winston");
 
-module.exports = function (req, res, next) {
+module.exports = function (err, req, res, next) {
+  winston.error(err.message, { metadata: err.stack });
+
   res.status(500).send("Something failed.");
 };

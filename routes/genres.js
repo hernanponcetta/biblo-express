@@ -7,6 +7,7 @@ const router = express.Router();
 
 //Multiple genres lookup
 router.get("/", async (req, res, next) => {
+  throw new Error("No se puede acceder a generos");
   res.send(await Genre.find());
 });
 
