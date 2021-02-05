@@ -9,6 +9,6 @@ module.exports = function () {
 
   const db = mongoose.connection;
   db.once("open", function () {
-    console.log("Connected to mongoDB...");
+    winston.info("Connected to mongoDB...");
   });
 };

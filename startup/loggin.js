@@ -1,3 +1,4 @@
+require("express-async-errors");
 const winston = require("winston");
 
 module.exports = function () {
@@ -5,7 +6,6 @@ module.exports = function () {
     new winston.transports.File({
       filename: "error.log",
       level: "error",
-      format: winston.format.json(),
     })
   );
 
@@ -14,26 +14,31 @@ module.exports = function () {
       new winston.transports.File({
         filename: "error.log",
         level: "error",
-        format: winston.format.json(),
       }),
     ],
     exceptionHandlers: [
-      new winston.transports.File({ filename: "exceptions.log" }),
+      new winston.transports.File({
+        filename: "error.log",
+        level: "error",
+      }),
     ],
     rejectionHandlers: [
-      new winston.transports.File({ filename: "rejections.log" }),
+      new winston.transports.File({
+        filename: "error.log",
+        level: "error",
+      }),
     ],
   });
 
   if (process.env.NODE_ENV !== "production") {
     winston.add(
       new winston.transports.Console({
-        format: winston.format.cli(),
+        format: winston.format.cli({ level: true }),
       })
     );
     logger.add(
       new winston.transports.Console({
-        format: winston.format.cli(),
+        format: winston.format.cli({ level: true }),
         handleExceptions: true,
         handleRejections: true,
       })
