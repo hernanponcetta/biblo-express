@@ -1,3 +1,4 @@
+const validateId = require("../middleware/validateObjectId");
 const auth = require("../middleware/auth");
 const { Genre, validate } = require("../models/genre");
 const mongoose = require("mongoose");
@@ -53,7 +54,7 @@ router.delete("/:id", [auth, admin], async (req, res) => {
 });
 
 //Single genre lookup
-router.get("/:id", async (req, res) => {
+router.get("/:id", [validateId], async (req, res) => {
   const genre = await Genre.findById(req.params.id);
 
   if (!genre)

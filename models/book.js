@@ -46,7 +46,7 @@ const Book = mongoose.model(
     isbn: {
       type: Number,
       required: true,
-      min: 0000000000000,
+      min: 0,
       max: 9999999999999,
     },
     available: {
@@ -68,7 +68,7 @@ function validateBook(book) {
     publisherId: Joi.objectId().required(),
     itemStock: Joi.number().min(0).max(255),
     genreId: Joi.objectId().required(),
-    isbn: Joi.number().min(0000000000000).max(9999999999999).required(),
+    isbn: Joi.number().min(0).max(9999999999999).required(),
     available: Joi.boolean().required(),
     bookCover: Joi.string(),
   });
