@@ -1,31 +1,30 @@
-const { before } = require("lodash");
+const app = require("../../app");
 const mongoose = require("mongoose");
 const request = require("supertest");
 const { Genre } = require("../../models/genre");
 const { User } = require("../../models/user");
 
-let server;
-
 describe("/genre", () => {
-  beforeEach(() => {
-    server = require("../../app");
+  beforeEach(async () => {
+    await mongoose.connect("mongodb://localhost:27017/bibloDB_test", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
   });
+
   afterEach(async () => {
-    await Genre.remove({});
-    server.close();
+    await mongoose.connection.db.dropDatabase();
+    await mongoose.connection.close();
   });
-  afterAll(() => {
-    mongoose.connection.close();
-  });
+
   describe("GET /", () => {
     it("Should return all genres", async () => {
       await Genre.collection.insertMany([
         { name: "genre1" },
         { name: "genre2" },
       ]);
-      const res = await request(server).get("/api/genres");
+      const res = await request(app).get("/api/genres");
 
-      expect(res.status).toBe(200);
       expect(res.body.length).toBe(2);
       expect(res.body.some((g) => g.name == "genre1")).toBeTruthy();
       expect(res.body.some((g) => g.name == "genre2")).toBeTruthy();
@@ -37,13 +36,13 @@ describe("/genre", () => {
       const genre = new Genre({ name: "genre1" });
       await genre.save();
 
-      const res = await request(server).get("/api/genres/" + genre._id);
+      const res = await request(app).get("/api/genres/" + genre._id);
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("name", genre.name);
     });
 
     it("Should return 404 if ivalid id is passed", async () => {
-      const res = await request(server).get("/api/genres/1");
+      const res = await request(app).get("/api/genres/1");
       expect(res.status).toBe(404);
     });
   });
@@ -53,7 +52,7 @@ describe("/genre", () => {
     let name;
 
     const exec = async () => {
-      return await request(server)
+      return await request(app)
         .post("/api/genres/")
         .set("x-auth-token", token)
         .send({ name });
