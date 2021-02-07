@@ -13,7 +13,6 @@ describe("Auth middleware", () => {
   });
 
   afterEach(async () => {
-    await mongoose.connection.db.dropDatabase();
     await mongoose.connection.close();
   });
 

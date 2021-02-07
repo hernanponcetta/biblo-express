@@ -13,7 +13,7 @@ describe("/genre", () => {
   });
 
   afterEach(async () => {
-    await mongoose.connection.db.dropDatabase();
+    await Genre.remove({});
     await mongoose.connection.close();
   });
 
