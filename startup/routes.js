@@ -18,9 +18,5 @@ module.exports = function (app) {
   app.use("/api/publishers", publishers);
   app.use("/api/auth", auth);
 
-  app.get("/test", (req, res) => {
-    res.status(200).send();
-  });
-
   app.use(error);
 };

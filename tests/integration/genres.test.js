@@ -4,7 +4,7 @@ const request = require("supertest");
 const { Genre } = require("../../models/genre");
 const { User } = require("../../models/user");
 
-describe("/genre", () => {
+describe("/api/genre", () => {
   beforeEach(async () => {
     await mongoose.connect("mongodb://localhost:27017/bibloDB_test", {
       useNewUrlParser: true,
@@ -88,7 +88,7 @@ describe("/genre", () => {
     it("Should save the genre if it is valid", async () => {
       await exec();
 
-      const genre = await Genre.find({ name: "genre1" });
+      const genre = await Genre.findOne({ name: "genre1" });
 
       expect(genre).not.toBe(null);
     });
@@ -96,10 +96,10 @@ describe("/genre", () => {
     it("Should save the genre name", async () => {
       const res = await exec();
 
-      const genre = await Genre.find({ name: "genre1" });
+      const genre = await Genre.findOne({ name: "genre1" });
+      console.log(genre);
 
-      expect(genre).not.toHaveProperty("_.id");
-      expect(genre).not.toHaveProperty("name", "genre1");
+      expect(genre).toHaveProperty("_id", "name", "genre1");
     });
   });
 });

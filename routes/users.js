@@ -16,10 +16,19 @@ router.get("/", async (req, res) => {
 //Single user create
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error)
+    return res
+      .status(400)
+      .send({ error: { status: 400, message: error.details[0].message } });
 
   let user = await User.findOne({ eMail: req.body.eMail });
-  if (user) return res.status(400).send("El usuario ya existe");
+  if (user)
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - User already exist",
+      },
+    });
 
   user = new User(
     _.pick(req.body, ["firstName", "lastName", "eMail", "password"])
@@ -33,7 +42,7 @@ router.post("/", async (req, res) => {
 
   res
     .header("x-auth-token", token)
-    .send(_.pick(user, ["_id", "firstName", "lastName"]));
+    .send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
 });
 
 //Single user update

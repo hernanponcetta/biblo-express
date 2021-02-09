@@ -13,6 +13,7 @@ describe("Auth middleware", () => {
   });
 
   afterEach(async () => {
+    await Genre.remove({});
     await mongoose.connection.close();
   });
 
