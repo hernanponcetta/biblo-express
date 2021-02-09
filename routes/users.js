@@ -1,3 +1,4 @@
+const admin = require("../middleware/admin");
 const auth = require("../middleware/auth");
 const config = require("config");
 const bcrypt = require("bcrypt");
@@ -9,7 +10,7 @@ const { token } = require("morgan");
 const router = express.Router();
 
 //Multiple user lookup
-router.get("/", async (req, res) => {
+router.get("/", [auth, admin], async (req, res) => {
   res.send(await User.find());
 });
 
@@ -45,7 +46,7 @@ router.post("/", async (req, res) => {
     .send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
 });
 
-//Single user update
+//Single user update with :id
 router.put("/:id", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
