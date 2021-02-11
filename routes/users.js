@@ -7,6 +7,7 @@ const { User, validate } = require("../models/user");
 const mongoose = require("mongoose");
 const express = require("express");
 const { token } = require("morgan");
+const { last } = require("lodash");
 const router = express.Router();
 
 //Multiple user lookup
@@ -44,6 +45,43 @@ router.post("/", async (req, res) => {
   res
     .header("x-auth-token", token)
     .send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
+});
+
+// Single user update /me
+router.put("/me", auth, async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.user._id))
+    return res.status(400).send({
+      error: { status: 400, message: `${req.params.id} is not a valid Id` },
+    });
+
+  const { error } = validate(req.body);
+  if (error)
+    return res
+      .status(400)
+      .send({ error: { status: 400, message: error.details[0].message } });
+
+  let user = await User.findOne({ eMail: req.body.eMail });
+  if (user)
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - User already exist",
+      },
+    });
+
+  user = _.pick(req.body, ["firstName", "lastName", "eMail", "password"]);
+
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(req.body.password, salt);
+
+  user = await User.findByIdAndUpdate(req.user._id, user, { new: true });
+
+  if (!user)
+    return res
+      .status(404)
+      .send({ error: { status: 404, message: "Not Found - User not found" } });
+
+  res.send(_.pick(user, ["firstName", "lastName", "eMail"]));
 });
 
 //Single user update with :id
