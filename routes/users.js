@@ -47,25 +47,37 @@ router.post("/", async (req, res) => {
 });
 
 //Single user update with :id
-router.put("/:id", async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.put("/:id", [auth, admin], async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send({
+      error: { status: 400, message: `${req.params.id} is not a valid Id` },
+    });
 
-  const user = await User.findByIdAndUpdate(
-    req.params.id,
-    {
-      firstName: req.body.firstName,
-      secondName: req.body.secondName,
-      eMail: req.body.eMail,
-    },
-    { new: true }
-  );
+  const { error } = validate(req.body);
+  if (error)
+    return res
+      .status(400)
+      .send({ error: { status: 400, message: error.details[0].message } });
+
+  let user = _.pick(req.body, [
+    "firstName",
+    "lastName",
+    "eMail",
+    "password",
+    "isAdmin",
+  ]);
+
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(req.body.password, salt);
+
+  user = await User.findByIdAndUpdate(req.params.id, user, { new: true });
 
   if (!user)
-    return res.status(404).send("No se encontro un usuario con ese Id.");
+    return res
+      .status(404)
+      .send({ error: { status: 404, message: "Not Found - User not found" } });
 
-  const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey"));
-  res.send(user);
+  res.send(_.pick(user, ["firstName", "lastName", "eMail"]));
 });
 
 //Single user delete

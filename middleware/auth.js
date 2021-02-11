@@ -19,7 +19,7 @@ module.exports = function (req, res, next) {
     res.status(400).send({
       error: {
         status: 400,
-        message: "Bad Request - Authorization has been refused",
+        message: "Bad Request - Invalid token",
       },
     });
   }
