@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
     .send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
 });
 
-// Single user update /me
+// User update
 router.put("/me", auth, async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.user._id))
     return res.status(400).send({
@@ -84,7 +84,7 @@ router.put("/me", auth, async (req, res) => {
   res.send(_.pick(user, ["firstName", "lastName", "eMail"]));
 });
 
-//Single user update with :id
+//Single user update by Id
 router.put("/:id", [auth, admin], async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id))
     return res.status(400).send({
@@ -127,17 +127,41 @@ router.put("/:id", [auth, admin], async (req, res) => {
   res.send(_.pick(user, ["firstName", "lastName", "eMail"]));
 });
 
-//Single user delete
-router.delete("/:id", async (req, res) => {
+//User delete
+router.delete("/me", auth, async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.user._id))
+    return res.status(400).send({
+      error: { status: 400, message: `${req.user._id} is not a valid Id` },
+    });
+
+  const user = await User.findByIdAndRemove(req.user._id);
+
+  if (!user)
+    return res
+      .status(404)
+      .send({ error: { status: 404, message: "Not Found - User not found" } });
+
+  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
+});
+
+//Single user delete by Id
+router.delete("/:id", [auth, admin], async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send({
+      error: { status: 400, message: `${req.params.id} is not a valid Id` },
+    });
+
   const user = await User.findByIdAndRemove(req.params.id);
 
   if (!user)
-    return res.status(404).send("No se encontro un usuario con ese Id.");
+    return res
+      .status(404)
+      .send({ error: { status: 404, message: "Not Found - User not found" } });
 
-  res.send(user);
+  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
 });
 
-//Single user lookup
+//User lookup
 router.get("/me", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
 

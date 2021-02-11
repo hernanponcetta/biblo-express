@@ -117,6 +117,25 @@ describe("POST /", () => {
     expect(res.body).toHaveProperty("error");
   });
 
+  it("should return 400 if eMail already exists", async () => {
+    const user1 = new User({
+      firstName: "name1",
+      lastName: "name2",
+      eMail: "name1@server.com",
+      password: "12345",
+      isAdmin: false,
+    });
+
+    await user1.save();
+
+    eMail = user1.eMail;
+
+    const res = await exec();
+
+    expect(res.status).toBe(400);
+    expect(res.body).toHaveProperty("error");
+  });
+
   it("should save the user if it is valid", async () => {
     const res = await exec();
 
