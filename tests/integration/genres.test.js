@@ -97,7 +97,6 @@ describe("/api/genre", () => {
       const res = await exec();
 
       const genre = await Genre.findOne({ name: "genre1" });
-      console.log(genre);
 
       expect(genre).toHaveProperty("_id", "name", "genre1");
     });

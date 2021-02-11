@@ -59,7 +59,16 @@ router.put("/:id", [auth, admin], async (req, res) => {
       .status(400)
       .send({ error: { status: 400, message: error.details[0].message } });
 
-  let user = _.pick(req.body, [
+  let user = await User.findOne({ eMail: req.body.eMail });
+  if (user)
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - User already exist",
+      },
+    });
+
+  user = _.pick(req.body, [
     "firstName",
     "lastName",
     "eMail",

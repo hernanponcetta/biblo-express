@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const app = require("../../../app");
 const request = require("supertest");
 const mongoose = require("mongoose");
-const { array } = require("joi");
 
 describe("PUT /:id", () => {
   beforeEach(async () => {
@@ -130,7 +129,7 @@ describe("PUT /:id", () => {
   });
 
   it("should return 400 if eMail already exists", async () => {
-    const user = new User({
+    const user1 = new User({
       firstName: "name1",
       lastName: "name2",
       eMail: "name1@server.com",
@@ -138,7 +137,19 @@ describe("PUT /:id", () => {
       isAdmin: false,
     });
 
-    await user.save();
+    const user2 = new User({
+      firstName: "name3",
+      lastName: "name4",
+      eMail: "name3@server.com",
+      password: "12345",
+      isAdmin: false,
+    });
+
+    await user1.save();
+    await user2.save();
+
+    _id = user1._id;
+    eMail = user2.eMail;
 
     const res = await exec();
 
