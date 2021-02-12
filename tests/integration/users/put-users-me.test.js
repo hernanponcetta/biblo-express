@@ -120,36 +120,7 @@ describe("PUT /me", () => {
     expect(res.body).toHaveProperty("error");
   });
 
-  it("should return 400 if eMail already exists", async () => {
-    const user1 = new User({
-      firstName: "name1",
-      lastName: "name2",
-      eMail: "name1@server.com",
-      password: "12345",
-      isAdmin: false,
-    });
-
-    const user2 = new User({
-      firstName: "name3",
-      lastName: "name4",
-      eMail: "name3@server.com",
-      password: "12345",
-      isAdmin: false,
-    });
-
-    await user1.save();
-    await user2.save();
-
-    token = jwt.sign({ _id: _id, isAdmin: false }, config.get("jwtPrivateKey"));
-    eMail = user2.eMail;
-
-    const res = await exec();
-
-    expect(res.status).toBe(400);
-    expect(res.body).toHaveProperty("error");
-  });
-
-  it("shoul update user", async () => {
+  it("should update user", async () => {
     const user = new User({
       firstName: "name1",
       lastName: "name2",
@@ -165,10 +136,12 @@ describe("PUT /me", () => {
       config.get("jwtPrivateKey")
     );
 
+    _id = user._id.toHexString();
+
     const res = await exec();
 
     expect(res.status).toBe(200);
-    expect(res.body).toEqual({ firstName, lastName, eMail });
+    expect(res.body).toEqual({ _id, firstName, lastName, eMail });
   });
 
   it("password should be hashed", async () => {

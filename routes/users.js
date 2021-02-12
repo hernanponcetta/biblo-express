@@ -59,15 +59,6 @@ router.put("/me", auth, async (req, res) => {
       .status(400)
       .send({ error: { status: 400, message: error.details[0].message } });
 
-  let user = await User.findOne({ eMail: req.body.eMail });
-  if (user)
-    return res.status(400).send({
-      error: {
-        status: 400,
-        message: "Bad Request - User already exist",
-      },
-    });
-
   user = _.pick(req.body, ["firstName", "lastName", "eMail", "password"]);
 
   const salt = await bcrypt.genSalt(10);
@@ -80,7 +71,7 @@ router.put("/me", auth, async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Not Found - User not found" } });
 
-  res.send(_.pick(user, ["firstName", "lastName", "eMail"]));
+  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
 });
 
 //Single user update by Id
@@ -95,15 +86,6 @@ router.put("/:id", [auth, admin], async (req, res) => {
     return res
       .status(400)
       .send({ error: { status: 400, message: error.details[0].message } });
-
-  let user = await User.findOne({ eMail: req.body.eMail });
-  if (user)
-    return res.status(400).send({
-      error: {
-        status: 400,
-        message: "Bad Request - User already exist",
-      },
-    });
 
   user = _.pick(req.body, [
     "firstName",
@@ -123,7 +105,7 @@ router.put("/:id", [auth, admin], async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Not Found - User not found" } });
 
-  res.send(_.pick(user, ["firstName", "lastName", "eMail"]));
+  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
 });
 
 //User delete
