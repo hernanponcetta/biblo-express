@@ -177,4 +177,21 @@ router.get("/me", auth, async (req, res) => {
   res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
 });
 
+//User lookup by Id
+router.get("/:id", [auth, admin], async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send({
+      error: { status: 400, message: `${req.params.id} is not a valid Id` },
+    });
+
+  const user = await User.findById(req.params.id);
+
+  if (!user)
+    return res
+      .status(404)
+      .send({ error: { status: 404, message: "Not Found - User not found" } });
+
+  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
+});
+
 module.exports = router;

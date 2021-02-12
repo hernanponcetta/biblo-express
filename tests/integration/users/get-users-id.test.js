@@ -27,7 +27,9 @@ describe("GET /me", () => {
   let token;
 
   const exec = async () => {
-    return await request(app).get("/api/users/me").set("x-auth-token", token);
+    return await request(app)
+      .get(`/api/users/${_id}`)
+      .set("x-auth-token", token);
   };
 
   beforeEach(() => {
@@ -37,11 +39,11 @@ describe("GET /me", () => {
     eMail = "name1@server.com";
     password = "12345";
 
-    token = jwt.sign({ _id, isAdmin: false }, config.get("jwtPrivateKey"));
+    token = jwt.sign({ _id, isAdmin: true }, config.get("jwtPrivateKey"));
   });
 
   it("should return 401 if user is not authenticated", async () => {
-    const res = await request(app).get("/api/users/me");
+    const res = await request(app).get(`/api/users/${_id}`);
 
     expect(res.status).toBe(401);
     expect(res.body).toHaveProperty("error");
@@ -55,9 +57,16 @@ describe("GET /me", () => {
     expect(res.body).toHaveProperty("error");
   });
 
+  it("should return 403 if user is not admin", async () => {
+    token = jwt.sign({ _id, isAdmin: false }, config.get("jwtPrivateKey"));
+    const res = await exec();
+
+    expect(res.status).toBe(403);
+    expect(res.body).toHaveProperty("error");
+  });
+
   it("should return 400 when passed an invalid Id", async () => {
     _id = "1";
-    token = jwt.sign({ _id, isAdmin: false }, config.get("jwtPrivateKey"));
 
     const res = await exec();
 
@@ -82,7 +91,6 @@ describe("GET /me", () => {
     await user.save();
 
     _id = user._id.toHexString();
-    token = jwt.sign({ _id, isAdmin: false }, config.get("jwtPrivateKey"));
 
     const res = await exec();
 
