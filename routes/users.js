@@ -7,7 +7,6 @@ const { User, validate } = require("../models/user");
 const mongoose = require("mongoose");
 const express = require("express");
 const { token } = require("morgan");
-const { last } = require("lodash");
 const router = express.Router();
 
 //Multiple user lookup
@@ -47,7 +46,7 @@ router.post("/", async (req, res) => {
     .send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
 });
 
-// User update
+//User update
 router.put("/me", auth, async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.user._id))
     return res.status(400).send({
@@ -163,9 +162,19 @@ router.delete("/:id", [auth, admin], async (req, res) => {
 
 //User lookup
 router.get("/me", auth, async (req, res) => {
-  const user = await User.findById(req.user._id).select("-password");
+  if (!mongoose.Types.ObjectId.isValid(req.user._id))
+    return res.status(400).send({
+      error: { status: 400, message: `${req.user._id} is not a valid Id` },
+    });
 
-  res.send(user);
+  const user = await User.findById(req.user._id);
+
+  if (!user)
+    return res
+      .status(404)
+      .send({ error: { status: 404, message: "Not Found - User not found" } });
+
+  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
 });
 
 module.exports = router;

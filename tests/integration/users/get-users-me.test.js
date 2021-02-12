@@ -4,9 +4,10 @@ const jwt = require("jsonwebtoken");
 const app = require("../../../app");
 const request = require("supertest");
 const mongoose = require("mongoose");
-const { iteratee } = require("lodash");
+const { iteratee, toNumber } = require("lodash");
+const { expectCt } = require("helmet");
 
-describe("DELETE /:id", () => {
+describe("GET /me", () => {
   beforeEach(async () => {
     await mongoose.connect("mongodb://localhost:27017/bibloDB_test", {
       useNewUrlParser: true,
@@ -28,9 +29,7 @@ describe("DELETE /:id", () => {
   let token;
 
   const exec = async () => {
-    return await request(app)
-      .delete("/api/users/me")
-      .set("x-auth-token", token);
+    return await request(app).get("/api/users/me").set("x-auth-token", token);
   };
 
   beforeEach(() => {
@@ -44,7 +43,7 @@ describe("DELETE /:id", () => {
   });
 
   it("should return 401 if user is not authenticated", async () => {
-    const res = await request(app).delete("/api/users/me");
+    const res = await request(app).get("/api/users/me");
 
     expect(res.status).toBe(401);
     expect(res.body).toHaveProperty("error");
@@ -58,8 +57,9 @@ describe("DELETE /:id", () => {
     expect(res.body).toHaveProperty("error");
   });
 
-  it("should return 400 if an invalid Id is send", async () => {
-    token = jwt.sign({ _id: "1", isAdmin: false }, config.get("jwtPrivateKey"));
+  it("should return 400 when passed an invalid Id", async () => {
+    _id = "1";
+    token = jwt.sign({ _id, isAdmin: false }, config.get("jwtPrivateKey"));
 
     const res = await exec();
 
@@ -67,26 +67,25 @@ describe("DELETE /:id", () => {
     expect(res.body).toHaveProperty("error");
   });
 
-  it("status should be 404 if not user is found", async () => {
+  it("should return 404 if not user is found", async () => {
     const res = await exec();
 
     expect(res.status).toBe(404);
     expect(res.body).toHaveProperty("error");
   });
 
-  it("should delete user", async () => {
+  it("should return a valid user", async () => {
     const user = new User({
       firstName,
       lastName,
       eMail,
       password,
     });
-
-    user.save();
+    await user.save();
 
     _id = user._id.toHexString();
-
     token = jwt.sign({ _id, isAdmin: false }, config.get("jwtPrivateKey"));
+
     const res = await exec();
 
     expect(res.status).toBe(200);
