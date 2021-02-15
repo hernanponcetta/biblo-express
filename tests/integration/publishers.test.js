@@ -201,20 +201,47 @@ describe("api/publishers", () => {
   });
 
   describe("DELETE /:id", () => {
+    let _id;
+    let token;
+
+    const exec = async () => {
+      return await request(app)
+        .delete(`/api/publishers/${_id}`)
+        .set("x-auth-token", token);
+    };
+
     it("should delete publisher", async () => {
       const publisher = new Publisher({ name: "publisher1" });
       await publisher.save();
 
-      const token = jwt.sign({ isAdmin: true }, config.get("jwtPrivateKey"));
+      token = jwt.sign({ isAdmin: true }, config.get("jwtPrivateKey"));
 
-      const _id = publisher._id.toHexString();
+      _id = publisher._id.toHexString();
 
-      const res = await request(app)
-        .delete(`/api/publishers/${_id}`)
-        .set("x-auth-token", token);
+      const res = await exec();
 
       expect(res.status).toBe(200);
       expect(res.body).toEqual({ _id, name: publisher.name });
+    });
+
+    it("should return 400 if invalid Id is passed", async () => {
+      _id = "1";
+
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.body).toHaveProperty("error");
+    });
+
+    it("shoul return 404 if no publisher is found", async () => {
+      token = jwt.sign({ isAdmin: true }, config.get("jwtPrivateKey"));
+
+      _id = mongoose.Types.ObjectId().toHexString();
+
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+      expect(res.body).toHaveProperty("error");
     });
   });
 });

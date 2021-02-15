@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const validateId = require("../middleware/validateObjectId");
 const auth = require("../middleware/auth");
 const { Genre, validate } = require("../models/genre");
@@ -12,7 +13,7 @@ router.get("/", async (req, res, next) => {
 });
 
 //Single genre create
-router.post("/", auth, async (req, res) => {
+router.post("/", [auth, admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -25,9 +26,12 @@ router.post("/", auth, async (req, res) => {
 });
 
 //single genre update
-router.put("/:id", async (req, res) => {
+router.put("/:id", [auth, admin, validateId], async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error)
+    return res
+      .status(400)
+      .send({ error: { status: 400, message: error.details[0].message } });
 
   const genre = await Genre.findByIdAndUpdate(
     req.params.id,
@@ -38,29 +42,44 @@ router.put("/:id", async (req, res) => {
   );
 
   if (!genre)
-    return res.status(404).send("No se encontro un género con ese Id.");
+    return res.status(404).send({
+      error: {
+        status: 404,
+        message: `No genre found with ${req.params.id} Id`,
+      },
+    });
 
   res.send(genre);
 });
 
 //Single genre delete
-router.delete("/:id", [auth, admin], async (req, res) => {
+router.delete("/:id", [auth, admin, validateId], async (req, res) => {
   const genre = await Genre.findByIdAndRemove(req.params.id);
 
   if (!genre)
-    return res.status(404).send("No se encontro un genero con ese Id.");
+    return res.status(404).send({
+      error: {
+        status: 404,
+        message: `Not Found - Not user was found with ${req.params.id} Id`,
+      },
+    });
 
-  res.send(genre);
+  res.send(_.pick(genre, ["_id", "name"]));
 });
 
 //Single genre lookup
-router.get("/:id", [validateId], async (req, res) => {
+router.get("/:id", validateId, async (req, res) => {
   const genre = await Genre.findById(req.params.id);
 
   if (!genre)
-    return res.status(404).send("No se encontro un género con ese Id");
+    return res.status(404).send({
+      error: {
+        status: 404,
+        message: `Not Found - No genre was found with ${req.params.id} Id`,
+      },
+    });
 
-  res.send(genre);
+  res.send(_.pick(genre, ["_id", "name"]));
 });
 
 module.exports = router;

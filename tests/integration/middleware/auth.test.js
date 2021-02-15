@@ -1,3 +1,5 @@
+const config = require("config");
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const app = require("../../../app");
 const request = require("supertest");
@@ -18,6 +20,7 @@ describe("Auth middleware", () => {
   });
 
   let token;
+  let _id;
 
   const exec = () => {
     return request(app)
@@ -25,10 +28,6 @@ describe("Auth middleware", () => {
       .set("x-auth-token", token)
       .send({ name: "genre1" });
   };
-
-  beforeEach(() => {
-    token = new User().generateAuthToken();
-  });
 
   it("should return 401 if no token is provided", async () => {
     token = "";
@@ -45,6 +44,9 @@ describe("Auth middleware", () => {
   });
 
   it("should return 200 if token is valid", async () => {
+    _id = mongoose.Types.ObjectId();
+    token = jwt.sign({ _id, isAdmin: true }, config.get("jwtPrivateKey"));
+
     const res = await exec();
 
     expect(res.status).toBe(200);

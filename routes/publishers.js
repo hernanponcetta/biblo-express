@@ -61,9 +61,24 @@ router.put("/:id", [auth, admin], async (req, res) => {
 
 //Single publisher delete
 router.delete("/:id", [auth, admin], async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: `Bad Request - ${req.params.id} is not a valid Id`,
+      },
+    });
+
   const publisher = await Publisher.findByIdAndRemove(req.params.id);
   if (!publisher)
-    return res.status(403).send("No se encontro ninguna editorial con es Id");
+    return res
+      .status(404)
+      .send({
+        error: {
+          status: 404,
+          message: `Not Found - No publisher was found with ${req.params.id} Id`,
+        },
+      });
 
   res.send(_.pick(publisher, ["_id", "name"]));
 });
