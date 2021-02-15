@@ -15,7 +15,7 @@ const Publisher = mongoose.model("Publisher", publisherSchema);
 
 function validatePublisher(publisher) {
   const schema = new Joi.object({
-    name: Joi.string().required(),
+    name: Joi.string().min(5).max(55).required(),
   });
 
   return schema.validate(publisher);

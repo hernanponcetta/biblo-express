@@ -20,11 +20,6 @@ describe("DELETE /:id", () => {
   });
 
   let _id;
-  let firstName;
-  let lastName;
-  let eMail;
-  let password;
-
   let token;
 
   const exec = async () => {
@@ -32,16 +27,6 @@ describe("DELETE /:id", () => {
       .delete(`/api/users/${_id}`)
       .set("x-auth-token", token);
   };
-
-  beforeEach(() => {
-    _id = new mongoose.Types.ObjectId().toHexString();
-    firstName = "name1";
-    lastName = "name2";
-    eMail = "name1@server.com";
-    password = "12345";
-
-    token = jwt.sign({ isAdmin: true }, config.get("jwtPrivateKey"));
-  });
 
   it("should return 401 if user is not authenticated", async () => {
     const res = await request(app).delete(`/api/users/${_id}`);
@@ -66,8 +51,10 @@ describe("DELETE /:id", () => {
     expect(res.body).toHaveProperty("error");
   });
 
-  it("should return 400 if is send a not valid Id", async () => {
+  it("should return 400 if is passed a not valid Id", async () => {
     _id = "1";
+    token = jwt.sign({ isAdmin: true }, config.get("jwtPrivateKey"));
+
     const res = await exec();
 
     expect(res.status).toBe(400);
@@ -75,6 +62,9 @@ describe("DELETE /:id", () => {
   });
 
   it("status should be 404 if not user is found", async () => {
+    _id = mongoose.Types.ObjectId();
+    token = jwt.sign({ isAdmin: true }, config.get("jwtPrivateKey"));
+
     const res = await exec();
 
     expect(res.status).toBe(404);
@@ -83,19 +73,24 @@ describe("DELETE /:id", () => {
 
   it("should delete user", async () => {
     const user = new User({
-      firstName,
-      lastName,
-      eMail,
-      password,
+      firstName: "name1",
+      lastName: "name2",
+      eMail: "name1@server.com",
+      password: "12345",
     });
-
-    user.save();
+    await user.save();
 
     _id = user._id.toHexString();
+    token = jwt.sign({ isAdmin: true }, config.get("jwtPrivateKey"));
 
     const res = await exec();
 
     expect(res.status).toBe(200);
-    expect(res.body).toEqual({ _id, firstName, lastName, eMail });
+    expect(res.body).toEqual({
+      _id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      eMail: user.eMail,
+    });
   });
 });
