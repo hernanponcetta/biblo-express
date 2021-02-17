@@ -34,7 +34,7 @@ describe("/api/authors", () => {
           death: "2000-01-01",
         },
       ]);
-      const res = await request(app).get("/api/author");
+      const res = await request(app).get("/api/authors");
 
       expect(res.body.length).toBe(2);
       expect(res.body.some((a) => a.name == "author1")).toBeTruthy();
