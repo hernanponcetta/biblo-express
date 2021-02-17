@@ -1,3 +1,4 @@
 {
-    "jwtPrivateKey": "biblo_jwtPrivateKey"
+    "jwtPrivateKey": "biblo_jwtPrivateKey",
+    "db_password": "db_password"
 }
