@@ -30,18 +30,16 @@ module.exports = function () {
     ],
   });
 
-  if (process.env.NODE_ENV !== "production") {
-    winston.add(
-      new winston.transports.Console({
-        format: winston.format.cli({ level: true }),
-      })
-    );
-    logger.add(
-      new winston.transports.Console({
-        format: winston.format.cli({ level: true }),
-        handleExceptions: true,
-        handleRejections: true,
-      })
-    );
-  }
+  winston.add(
+    new winston.transports.Console({
+      format: winston.format.cli({ level: true }),
+    })
+  );
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.cli({ level: true }),
+      handleExceptions: true,
+      handleRejections: true,
+    })
+  );
 };
