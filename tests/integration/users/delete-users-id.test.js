@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const app = require("../../../app");
 const request = require("supertest");
 const mongoose = require("mongoose");
-const { iteratee } = require("lodash");
 
 describe("DELETE /:id", () => {
   beforeEach(async () => {
@@ -51,16 +50,6 @@ describe("DELETE /:id", () => {
     expect(res.body).toHaveProperty("error");
   });
 
-  it("should return 400 if is passed a not valid Id", async () => {
-    _id = "1";
-    token = jwt.sign({ isAdmin: true }, config.get("jwtPrivateKey"));
-
-    const res = await exec();
-
-    expect(res.status).toBe(400);
-    expect(res.body).toHaveProperty("error");
-  });
-
   it("status should be 404 if not user is found", async () => {
     _id = mongoose.Types.ObjectId();
     token = jwt.sign({ isAdmin: true }, config.get("jwtPrivateKey"));
@@ -85,6 +74,7 @@ describe("DELETE /:id", () => {
 
     const res = await exec();
 
+    console.log(res.body);
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       _id,

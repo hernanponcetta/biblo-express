@@ -1,3 +1,4 @@
+const validateId = require("../middleware/validateObjectId");
 const admin = require("../middleware/admin");
 const auth = require("../middleware/auth");
 const config = require("config");
@@ -6,12 +7,17 @@ const _ = require("lodash");
 const { User, validate } = require("../models/user");
 const mongoose = require("mongoose");
 const express = require("express");
-const { token } = require("morgan");
 const router = express.Router();
 
 //Multiple user lookup
 router.get("/", [auth, admin], async (req, res) => {
-  res.send(await User.find());
+  const users = await User.find();
+
+  res.send(
+    _.map(users, (user) => {
+      return _.pick(user, ["_id", "firstName", "lastName", "eMail", "isAdmin"]);
+    })
+  );
 });
 
 //Single user create
@@ -48,11 +54,6 @@ router.post("/", async (req, res) => {
 
 //User update
 router.put("/me", auth, async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.user._id))
-    return res.status(400).send({
-      error: { status: 400, message: `${req.params.id} is not a valid Id` },
-    });
-
   const { error } = validate(req.body);
   if (error)
     return res
@@ -75,7 +76,7 @@ router.put("/me", auth, async (req, res) => {
 });
 
 //Single user update by Id
-router.put("/:id", [auth, admin], async (req, res) => {
+router.put("/:id", [auth, admin, validateId], async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id))
     return res.status(400).send({
       error: { status: 400, message: `${req.params.id} is not a valid Id` },
@@ -110,11 +111,6 @@ router.put("/:id", [auth, admin], async (req, res) => {
 
 //User delete
 router.delete("/me", auth, async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.user._id))
-    return res.status(400).send({
-      error: { status: 400, message: `${req.user._id} is not a valid Id` },
-    });
-
   const user = await User.findByIdAndRemove(req.user._id);
 
   if (!user)
@@ -126,12 +122,7 @@ router.delete("/me", auth, async (req, res) => {
 });
 
 //Single user delete by Id
-router.delete("/:id", [auth, admin], async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send({
-      error: { status: 400, message: `${req.params.id} is not a valid Id` },
-    });
-
+router.delete("/:id", [auth, admin, validateId], async (req, res) => {
   const user = await User.findByIdAndRemove(req.params.id);
 
   if (!user)
@@ -144,11 +135,6 @@ router.delete("/:id", [auth, admin], async (req, res) => {
 
 //User lookup
 router.get("/me", auth, async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.user._id))
-    return res.status(400).send({
-      error: { status: 400, message: `${req.user._id} is not a valid Id` },
-    });
-
   const user = await User.findById(req.user._id);
 
   if (!user)
@@ -160,12 +146,7 @@ router.get("/me", auth, async (req, res) => {
 });
 
 //User lookup by Id
-router.get("/:id", [auth, admin], async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send({
-      error: { status: 400, message: `${req.params.id} is not a valid Id` },
-    });
-
+router.get("/:id", [auth, admin, validateId], async (req, res) => {
   const user = await User.findById(req.params.id);
 
   if (!user)

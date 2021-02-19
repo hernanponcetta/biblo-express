@@ -65,14 +65,6 @@ describe("PUT /me", () => {
     expect(res.body).toHaveProperty("error");
   });
 
-  it("should return 400 if is send a not valid Id", async () => {
-    token = jwt.sign({ _id: "1", isAdmin: false }, config.get("jwtPrivateKey"));
-    const res = await exec();
-
-    expect(res.status).toBe(400);
-    expect(res.body).toHaveProperty("error");
-  });
-
   it("should return 404 if user is not found", async () => {
     const res = await exec();
 

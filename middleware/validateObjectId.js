@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
     return res.status(400).send({
       error: {
         status: 400,
-        message: `Bad Request - ${req.params.id} is not a valid Id`,
+        message: "Bad Request - Invalid Id",
       },
     });
 

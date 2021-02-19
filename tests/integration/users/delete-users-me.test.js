@@ -58,15 +58,6 @@ describe("DELETE /:id", () => {
     expect(res.body).toHaveProperty("error");
   });
 
-  it("should return 400 if an invalid Id is send", async () => {
-    token = jwt.sign({ _id: "1", isAdmin: false }, config.get("jwtPrivateKey"));
-
-    const res = await exec();
-
-    expect(res.status).toBe(400);
-    expect(res.body).toHaveProperty("error");
-  });
-
   it("status should be 404 if not user is found", async () => {
     const res = await exec();
 
