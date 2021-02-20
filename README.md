@@ -17,3 +17,7 @@ It includes many features as:
 - Supertest
 - Bcrypt
 - Joi
+
+## Setup
+Coming soon...
+It will be deploy to Heroku. I will provide a complete Postman collectin to explore all endpoints.
