@@ -10,6 +10,7 @@ It includes many features as:
 - Unit and integration testing
 
 ## Technologies
+Project is created with:
 - Express
 - MongoDB
 - Postman
@@ -20,4 +21,4 @@ It includes many features as:
 
 ## Setup
 Coming soon...
-It will be deploy to Heroku. I will provide a complete Postman collectin to explore all endpoints.
+It will be deploy to Heroku. I will provide a complete Postman collection to explore all endpoints.
