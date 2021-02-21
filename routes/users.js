@@ -77,11 +77,6 @@ router.put("/me", auth, async (req, res) => {
 
 //Single user update by Id
 router.put("/:id", [auth, admin, validateId], async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send({
-      error: { status: 400, message: `${req.params.id} is not a valid Id` },
-    });
-
   const { error } = validate(req.body);
   if (error)
     return res

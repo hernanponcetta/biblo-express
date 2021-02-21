@@ -74,7 +74,6 @@ describe("DELETE /:id", () => {
 
     const res = await exec();
 
-    console.log(res.body);
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       _id,

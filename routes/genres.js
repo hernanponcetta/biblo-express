@@ -15,14 +15,17 @@ router.get("/", async (req, res, next) => {
 //Single genre create
 router.post("/", [auth, admin], async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error)
+    return res
+      .status(400)
+      .send({ error: { status: 400, message: error.details[0].message } });
 
   let genre = new Genre({
     name: req.body.name,
   });
 
   genre = await genre.save();
-  res.send(genre);
+  res.send(_.pick(genre, ["_id", "name"]));
 });
 
 //single genre update
@@ -49,7 +52,7 @@ router.put("/:id", [auth, admin, validateId], async (req, res) => {
       },
     });
 
-  res.send(genre);
+  res.send(_.pick(genre, ["_id,", "name"]));
 });
 
 //Single genre delete

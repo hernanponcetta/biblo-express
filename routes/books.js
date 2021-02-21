@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const { Book, validate } = require("../models/book");
 const { Genre } = require("../models/genre");
 const { Author } = require("../models/author");
@@ -8,7 +9,23 @@ const router = express.Router();
 
 //Multiple books lookup
 router.get("/", async (req, res) => {
-  res.send(await Book.find().sort("title"));
+  const books = await Book.find();
+  res.send(
+    _.map(books, (book) => {
+      return _.pick(book, [
+        "_id",
+        "title",
+        "author",
+        "price",
+        "publisher",
+        "itemStock",
+        "genre",
+        "isbn",
+        "available",
+        "bookCover",
+      ]);
+    })
+  );
 });
 
 //Single book create

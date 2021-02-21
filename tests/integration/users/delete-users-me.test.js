@@ -6,7 +6,7 @@ const request = require("supertest");
 const mongoose = require("mongoose");
 const { iteratee } = require("lodash");
 
-describe("DELETE /:id", () => {
+describe("DELETE /me", () => {
   beforeEach(async () => {
     await mongoose.connect("mongodb://localhost:27017/bibloDB_test", {
       useNewUrlParser: true,
@@ -73,7 +73,7 @@ describe("DELETE /:id", () => {
       password,
     });
 
-    user.save();
+    await user.save();
 
     _id = user._id.toHexString();
 

@@ -1,3 +1,4 @@
+const validateId = require("../middleware/validateObjectId");
 const _ = require("lodash");
 const { Author, validate } = require("../models/author");
 const mongoose = require("mongoose");
@@ -37,13 +38,13 @@ router.post("/", [auth, admin], async (req, res) => {
   res.send(author);
 });
 
-//Single author update
-router.put("/me", async (req, res) => {
+//Single author update by Id
+router.put("/:id", [auth, admin, validateId], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
     return res
       .status(400)
-      .send({ error: { estatus: 400, message: error.details[0].message } });
+      .send({ error: { statud: 400, message: error.details[0].message } });
 
   const author = await Author.findByIdAndUpdate(
     req.params.id,
@@ -57,49 +58,39 @@ router.put("/me", async (req, res) => {
     { new: true }
   );
   if (!author)
-    return res.status(404).res.send("No se encontro un Autor con ese Id");
+    return res
+      .status(404)
+      .send({ error: { status: 404, message: "Author Id was not found" } });
 
-  res.send(author);
-});
-
-//Single author update by Id
-router.put("/:id", async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
-  const author = await Author.findByIdAndUpdate(
-    req.params.id,
-    {
-      name: req.body.name,
-      bio: req.body.bio,
-      authorPhoto: req.body.authorPhoto,
-      born: req.body.born,
-      death: req.body.death,
-    },
-    { new: true }
+  res.send(
+    _.pick(author, ["_id", "name", "bio", "authorPhoto", "born", "death"])
   );
-  if (!author)
-    return res.status(404).res.send("No se encontro un Autor con ese Id");
-
-  res.send(author);
 });
 
 //Single author Delete
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", [auth, admin, validateId], async (req, res) => {
   const author = await Author.findByIdAndDelete(req.params.id);
   if (!author)
-    return res.status(404).send("No se encontro un Autor con ese Id");
+    return res
+      .status(404)
+      .send({ error: { status: 404, message: "Author Id was not found" } });
 
-  res.send(author);
+  res.send(
+    _.pick(author, ["_id", "name", "bio", "authorPhoto", "born", "death"])
+  );
 });
 
 //Single author lookup
-router.get("/:id", async (req, res) => {
+router.get("/:id", validateId, async (req, res) => {
   const author = await Author.findById(req.params.id);
   if (!author)
-    return res.status(404).send("No se encontro un Autor con ese Id");
+    return res
+      .status(404)
+      .send({ error: { status: 404, message: "Author Id was not found" } });
 
-  res.send(author);
+  res.send(
+    _.pick(author, ["_id", "name", "bio", "authorPhoto", "born", "death"])
+  );
 });
 
 module.exports = router;

@@ -29,7 +29,7 @@ const Book = mongoose.model(
       min: 0,
       max: 10000,
     },
-    publisherId: {
+    publisher: {
       type: publisherSchema,
       required: true,
     },
