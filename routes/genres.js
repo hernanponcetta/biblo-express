@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
 
   res.send(
     _.map(genres, (genre) => {
-      return _.pick(book, ["_id", "name"]);
+      return _.pick(genre, ["_id", "name"]);
     })
   );
 });
