@@ -9,7 +9,13 @@ const router = express.Router();
 
 //Multiple genres lookup
 router.get("/", async (req, res, next) => {
-  res.send(await Genre.find());
+  const genres = await Genre.find();
+
+  res.send(
+    _.map(genres, (genre) => {
+      return _.pick(book, ["_id", "name"]);
+    })
+  );
 });
 
 //Single genre create

@@ -8,7 +8,13 @@ const router = express.Router();
 
 //Multiple publishers lookup
 router.get("/", async (req, res) => {
-  res.send(await Publisher.find().sort("name"));
+  const publishers = await Publisher.find();
+
+  res.send(
+    _.map(publishers, (publisher) => {
+      return _.pick(publisher, ["_id", "name"]);
+    })
+  );
 });
 
 //Single publisher create
@@ -71,14 +77,12 @@ router.delete("/:id", [auth, admin], async (req, res) => {
 
   const publisher = await Publisher.findByIdAndRemove(req.params.id);
   if (!publisher)
-    return res
-      .status(404)
-      .send({
-        error: {
-          status: 404,
-          message: `Not Found - No publisher was found with ${req.params.id} Id`,
-        },
-      });
+    return res.status(404).send({
+      error: {
+        status: 404,
+        message: `Not Found - No publisher was found with ${req.params.id} Id`,
+      },
+    });
 
   res.send(_.pick(publisher, ["_id", "name"]));
 });
