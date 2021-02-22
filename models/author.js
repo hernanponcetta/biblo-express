@@ -31,7 +31,7 @@ function validateAuthor(author) {
     bio: Joi.string().min(5).max(510).required(),
     authorPhoto: Joi.string().min(5).max(255),
     born: Joi.date().required(),
-    death: Joi.date().required(),
+    death: Joi.date(),
   });
 
   return schema.validate(author);
