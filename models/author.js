@@ -28,7 +28,7 @@ const Author = mongoose.model(
 function validateAuthor(author) {
   const schema = Joi.object({
     name: Joi.string().min(5).max(55).required(),
-    bio: Joi.string().min(5).max(255).required(),
+    bio: Joi.string().min(5).max(510).required(),
     authorPhoto: Joi.string().min(5).max(255),
     born: Joi.date().required(),
     death: Joi.date().required(),
