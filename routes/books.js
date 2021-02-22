@@ -1,3 +1,6 @@
+const validateId = require("../middleware/validateObjectId");
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 const _ = require("lodash");
 const { Book, validate } = require("../models/book");
 const { Genre } = require("../models/genre");
@@ -29,18 +32,39 @@ router.get("/", async (req, res) => {
 });
 
 //Single book create
-router.post("/", async (req, res) => {
+router.post("/", [auth, admin], async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error)
+    return res
+      .status(400)
+      .send({ error: { status: 400, message: error.details[0].message } });
 
   const genre = await Genre.findById(req.body.genreId);
-  if (!genre) return res.status(400).send("No existe un género con ese Id");
+  if (!genre)
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: `No genre found with ${req.body.genreId}`,
+      },
+    });
 
   const author = await Author.findById(req.body.authorId);
-  if (!author) return res.status(400).send("No existe un autor con ese Id");
+  if (!author)
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: `No author was found with ${req.body.authorId}`,
+      },
+    });
 
   const publisher = await Publisher.findById(req.body.publisherId);
-  if (!author) return res.status(400).send("No existe un autor con ese Id");
+  if (!publisher)
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: `No publisher was found with ${req.body.publisherId}`,
+      },
+    });
 
   const book = new Book({
     title: req.body.title,
@@ -64,19 +88,56 @@ router.post("/", async (req, res) => {
   });
 
   await book.save();
-  res.send(book);
+  res.send(
+    _.pick(book, [
+      "_id",
+      "title",
+      "author",
+      "price",
+      "publisher",
+      "itemStock",
+      "genre",
+      "isbn",
+      "available",
+      "bookCover",
+    ])
+  );
 });
 
 //Single book update
-router.put("/:id", async (req, res) => {
+router.put("/:id", [auth, admin, validateId], async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error)
+    return res
+      .status(400)
+      .send({ error: { status: 400, message: error.details[0].message } });
 
   const genre = await Genre.findById(req.body.genreId);
-  if (!genre) return res.status(400).send("No existe un género con ese Id");
+  if (!genre)
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: `No genre found with ${req.body.genreId}`,
+      },
+    });
 
   const author = await Author.findById(req.body.authorId);
-  if (!author) return res.status(400).send("No existe un autor con ese Id");
+  if (!author)
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: `No author found with ${req.body.authorId}`,
+      },
+    });
+
+  const publisher = await Publisher.findById(req.body.publisherId);
+  if (!publisher)
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: `No publisher found with ${req.body.publisherId}`,
+      },
+    });
 
   const book = await Book.findByIdAndUpdate(
     req.params.id,
@@ -103,27 +164,84 @@ router.put("/:id", async (req, res) => {
     { new: true }
   );
 
-  if (!book) return res.status(404).send("No se encontro un libro con ese Id.");
+  if (!book)
+    return res.status(404).send({
+      error: {
+        status: 404,
+        message: `No book found with ${req.params.id}`,
+      },
+    });
 
-  res.send(book);
+  res.send(
+    _.pick(book, [
+      "_id",
+      "title",
+      "author",
+      "price",
+      "publisher",
+      "itemStock",
+      "genre",
+      "isbn",
+      "available",
+      "bookCover",
+    ])
+  );
 });
 
 //Single book delete
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", [auth, admin, validateId], async (req, res) => {
   const book = await Book.findByIdAndRemove(req.params.id);
 
-  if (!book) return res.status(404).send("No se encontro un libro con ese Id.");
+  if (!book)
+    return res.status(404).send({
+      error: {
+        status: 404,
+        message: `No book found with ${req.params.id}`,
+      },
+    });
 
-  res.send(book);
+  res.send(
+    _.pick(book, [
+      "_id",
+      "title",
+      "author",
+      "price",
+      "publisher",
+      "itemStock",
+      "genre",
+      "isbn",
+      "available",
+      "bookCover",
+    ])
+  );
 });
 
 //Single book lookup
-router.get("/:id", async (req, res) => {
+router.get("/:id", validateId, async (req, res) => {
   const book = await Book.findById(req.params.id);
 
-  if (!book) return res.status(404).send("No se encontro un libro con ese Id");
+  if (!book)
+    return res.status(404).send({
+      error: {
+        status: 404,
+        message: `No book found with ${req.params.id}`,
+      },
+    });
 
-  res.send(book);
+  res.send(
+    _.pick(book, [
+      "_id",
+      "title",
+      "author",
+      "price",
+      "publisher",
+      "itemStock",
+      "genre",
+      "isbn",
+      "available",
+      "bookCover",
+    ])
+  );
 });
 
 module.exports = router;
