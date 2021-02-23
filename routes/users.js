@@ -24,9 +24,12 @@ router.get("/", [auth, admin], async (req, res) => {
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error)
-    return res
-      .status(400)
-      .send({ error: { status: 400, message: error.details[0].message } });
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - " + error.details[0].message,
+      },
+    });
 
   let user = await User.findOne({ eMail: req.body.eMail });
   if (user)
@@ -58,7 +61,12 @@ router.put("/me", auth, async (req, res) => {
   if (error)
     return res
       .status(400)
-      .send({ error: { status: 400, message: error.details[0].message } });
+      .send({
+        error: {
+          status: 400,
+          message: "Bad Request - " + error.details[0].message,
+        },
+      });
 
   user = _.pick(req.body, ["firstName", "lastName", "eMail", "password"]);
 
@@ -81,7 +89,12 @@ router.put("/:id", [auth, admin, validateId], async (req, res) => {
   if (error)
     return res
       .status(400)
-      .send({ error: { status: 400, message: error.details[0].message } });
+      .send({
+        error: {
+          status: 400,
+          message: "Bad Request - " + error.details[0].message,
+        },
+      });
 
   user = _.pick(req.body, [
     "firstName",

@@ -1,3 +1,4 @@
+const validateId = require("../middleware/validateObjectId");
 const _ = require("lodash");
 const admin = require("../middleware/admin");
 const auth = require("../middleware/auth");
@@ -23,30 +24,32 @@ router.post("/", [auth, admin], async (req, res) => {
   if (error)
     return res
       .status(400)
-      .send({ error: { status: 400, message: error.details[0].message } });
+      .send({
+        error: {
+          status: 400,
+          message: "Bad Request - " + error.details[0].message,
+        },
+      });
 
   const publisher = new Publisher({
     name: req.body.name,
   });
   await publisher.save();
-  res.send(publisher);
+  res.send(_.pick(publisher, ["_id", "name"]));
 });
 
 //Single publisher update
-router.put("/:id", [auth, admin], async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send({
-      error: {
-        status: 400,
-        message: `Bad Request - ${req.params.id} is not a valid Id`,
-      },
-    });
-
+router.put("/:id", [auth, admin, validateId], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
     return res
       .status(400)
-      .send({ error: { status: 400, message: error.details[0].message } });
+      .send({
+        error: {
+          status: 400,
+          message: "Bad Request - " + error.details[0].message,
+        },
+      });
 
   const publisher = await Publisher.findByIdAndUpdate(
     req.params.id,
@@ -66,15 +69,7 @@ router.put("/:id", [auth, admin], async (req, res) => {
 });
 
 //Single publisher delete
-router.delete("/:id", [auth, admin], async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send({
-      error: {
-        status: 400,
-        message: `Bad Request - ${req.params.id} is not a valid Id`,
-      },
-    });
-
+router.delete("/:id", [auth, admin, validateId], async (req, res) => {
   const publisher = await Publisher.findByIdAndRemove(req.params.id);
   if (!publisher)
     return res.status(404).send({
@@ -88,15 +83,7 @@ router.delete("/:id", [auth, admin], async (req, res) => {
 });
 
 //Single publisher lookup
-router.get("/:id", async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send({
-      error: {
-        status: 400,
-        message: "Bad Request - Not a valid Id",
-      },
-    });
-
+router.get("/:id", validateId, async (req, res) => {
   const publisher = await Publisher.findById(req.params.id);
 
   if (!publisher)
@@ -107,7 +94,7 @@ router.get("/:id", async (req, res) => {
       },
     });
 
-  res.send(publisher);
+  res.send(_.pick(publisher, ["_id", "name"]));
 });
 
 module.exports = router;

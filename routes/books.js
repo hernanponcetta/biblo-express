@@ -37,7 +37,12 @@ router.post("/", [auth, admin], async (req, res) => {
   if (error)
     return res
       .status(400)
-      .send({ error: { status: 400, message: error.details[0].message } });
+      .send({
+        error: {
+          status: 400,
+          message: "Bad Request - " + error.details[0].message,
+        },
+      });
 
   const genre = await Genre.findById(req.body.genreId);
   if (!genre)
@@ -110,7 +115,12 @@ router.put("/:id", [auth, admin, validateId], async (req, res) => {
   if (error)
     return res
       .status(400)
-      .send({ error: { status: 400, message: error.details[0].message } });
+      .send({
+        error: {
+          status: 400,
+          message: "Bad Request - " + error.details[0].message,
+        },
+      });
 
   const genre = await Genre.findById(req.body.genreId);
   if (!genre)

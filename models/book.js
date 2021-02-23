@@ -62,15 +62,48 @@ const Book = mongoose.model(
 
 function validateBook(book) {
   const schema = Joi.object({
-    title: Joi.string().min(5).max(255).required(),
-    authorId: Joi.objectId().required(),
-    price: Joi.number().min(0).required(),
-    publisherId: Joi.objectId().required(),
-    itemStock: Joi.number().min(0).max(255),
-    genreId: Joi.objectId().required(),
-    isbn: Joi.number().min(0).max(9999999999999).required(),
-    available: Joi.boolean().required(),
-    bookCover: Joi.string(),
+    title: Joi.string().min(5).max(255).required().messages({
+      "string.base": "title should be a type string",
+      "string.min": "title should have a minimum length of {#limit}",
+      "string.max": "title should have a max length of {#limit}",
+      "string.empty": "title should not be empty",
+      "any.required": "title is a required field",
+    }),
+    authorId: Joi.objectId().required().messages({
+      objectId: "authorId should be a type string",
+      "any.required": "authorId is a required field",
+    }),
+    price: Joi.number().min(0).required().messages({
+      "number.base": "price should be a type number",
+      "number.min": "price should be greater than 0",
+      "any.required": "price is a required field",
+    }),
+    publisherId: Joi.objectId().required().messages({
+      "any.required": "publisherId is a required field",
+    }),
+    itemStock: Joi.number().min(0).max(255).messages({
+      "number.base": "itemStock should be a type number",
+      "number.min": "itemStock should be greater than 0",
+      "number.max": "itemStock should be less than 255",
+      "any.required": "itemStock is a required field",
+    }),
+    genreId: Joi.objectId().required().messages({
+      "any.required": "genreId is a required field",
+    }),
+    isbn: Joi.number().min(0).max(9999999999999).required().messages({
+      "number.base": "isbn should be a type number",
+      "number.min": "isbn should be greater than 0",
+      "number.max": "isbn should be less than 9999999999999",
+      "any.required": "isbn is a required field",
+    }),
+    available: Joi.boolean().required().messages({
+      "boolean.base": "available should be a type boolean",
+      "any.base": "available is a required field",
+    }),
+    bookCover: Joi.string().messages({
+      "string.base": "title should be a type string",
+      "any.required": "title is a required field",
+    }),
   });
 
   return schema.validate(book);

@@ -14,7 +14,13 @@ const Genre = mongoose.model("Genre", genreSchema);
 
 function validateGenre(genre) {
   const schema = Joi.object({
-    name: Joi.string().min(5).max(50).required(),
+    name: Joi.string().min(5).max(50).required().messages({
+      "string.base": "name should be a type string",
+      "string.min": "name should have a minimum length of {#limit}",
+      "string.max": "name should have a max length of {#limit}",
+      "string.empty": "name should not be empty",
+      "any.required": "name is a required field",
+    }),
   });
 
   return schema.validate(genre);

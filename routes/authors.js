@@ -12,7 +12,14 @@ router.get("/", async (req, res) => {
   const authors = await Author.find();
   res.send(
     _.map(authors, (author) => {
-      return _.pick(author, ["_id", "name", "bio", "born", "death"]);
+      return _.pick(author, [
+        "_id",
+        "name",
+        "bio",
+        "authorPhoto",
+        "born",
+        "death",
+      ]);
     })
   );
 });
