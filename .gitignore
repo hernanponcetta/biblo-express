@@ -1,4 +1,6 @@
+# Folders
 node_modules/
 coverage/
 
-env_config
+# environment variables
+.env

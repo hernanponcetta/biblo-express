@@ -1,5 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
+const developer = require("../routes/developer");
 const books = require("../routes/books");
 const users = require("../routes/users");
 const genres = require("../routes/genres");
@@ -17,6 +18,8 @@ module.exports = function (app) {
   app.use("/api/authors", authors);
   app.use("/api/publishers", publishers);
   app.use("/api/auth", auth);
+
+  app.use("/developer", developer);
 
   app.use(error);
 };

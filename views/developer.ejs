@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  <script defer src="devScript.js"></script> 
+</head>
+<body>
+  <header class="bg-green-600">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center px-3 py-5">
+        <div class="w-16">
+          <img src="biblo_white.svg" alt="">
+        </div>
+        <div class="pl-5">
+          <span class="font-sans text-white text-3xl tracking-tighter subpixel-antialiased">for Developers</span>
+        </div>
+      </div>
+      <div class="px-10 text-3xl text-white"><button id="close-top-menu" class="focus:outline-none">
+        <span id="fa-bars" class="">
+          <i class="fas fa-bars"></i>
+        </span>
+        <span id="fa-times" class="hidden">
+          <i class="fas fa-times"></i>
+        </span>
+      </button>
+      </div>
+    </div>
+    <ul id="nav-item-container" class="text-white text-xl hidden">
+      <li class="border-t border-b py-3 pl-6">USERS</li>
+      <li class="border-b py-3 pl-6">BOOKS</li>
+      <li class="border-b py-3 pl-6">AUTHORS</li>
+      <li class="border-b py-3 pl-6">GENRES</li>
+      <li class="border-b py-3 pl-6">PUBLISHERS</li>
+    </ul>
+  </header>
+  <div class="container mx-auto">
+    <div class="p-6 text-gray-800">
+      <h1 class="pt-4 pb-10 text-5xl font-black subpixel-antialiased">Web API</h1>
+      <article class="text-sm leading-relaxed">
+        <p class="pb-3">
+          The motivation behind this project was to create a Web API to function as back end for Biblo online Bookstore.
+        </p>
+        <p class="pb-3">
+          It includes many features as:
+        </p>
+        <ul class="list-disc list-inside pb-3">
+          <li>User authentication</li>
+          <li>Schema validation</li>
+          <li>Password hashing</li>
+          <li>Unit and integration testing</li>
+        </ul>
+        <p class="pb-3">
+          Based on simple REST principles, the Biblo Web API endpoints can return, create, update and delete resources from Biblo data base.
+        </p>
+        <p class="pb-3">
+          The base address of Web API is <a href="https://biblo-express.herokuapp.com/api" class="text-green-700">https://biblo-express.herokuapp.com/api</a>. The API provides a set of endpoints, each with its own unique path.
+        </p>
+        <p class="pb-3">
+          To perform certain tasks, such as acces users data, update or delete books, authors or geners, users must have administration rights. A Json Web Token is provided after user authentication including user rights.
+        </p>
+        <p class="pb-3">
+          To start using Biblo Web API I provide a <a href="#" class="text-green-700">Postman Colleccion</a> and a Dummy Admin so you can start exploring the API with full admin rights.
+        </p>
+        <p class="pb-3">
+          To obtain an authentication token you will need to send a POST request to <a href="https://biblo-express.herokuapp.com/api/auth" class="text-green-700">https://biblo-express.herokuapp.com/api/auth</a> with eMail and password in the request Body:
+        </p>
+        <div class="mb-3 pl-6 text-gray-600 bg-green-100">
+          <ul>
+            <li>{</li>
+            <li>"eMail": "dummyadmin@biblo.com",</li>
+            <li>"password": "12345"</li>
+            <li>}</li>
+          </ul>
+        </div>
+        <p class="pb-3">
+          Then you will have to set <span class="text-gray-600 bg-green-100">x-auth-token: {{token}}</span> request header.
+        </p>
+      </article>
+      <article class="text-sm leading-relaxed text-gray-800">
+        <h2 class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Requests</h2>
+        <p class="pb-3">
+          The Biblo Web API is based on REST principles. Data resources are accessed via standard HTTPS requests to an API endpoint. Where possible, Web API uses appropriate HTTP verbs for each action:
+        </p>
+        <table>
+          <thead>
+            <tr class="border-b-2">
+              <th class="pr-6 py-2">METHOD</th>
+              <th class="text-left">ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b">
+              <td class="py-2">GET</td>
+              <td>Retrieves resources or collections</td>
+            </tr>
+            <tr class="border-b">
+              <td class="py-2">POST</td>
+              <td>Creates resources</td>
+            </tr>
+            <tr class="border-b">
+              <td class="py-2">PUT</td>
+              <td>Changes and/or replaces resources</td>
+            </tr>
+            <tr>
+              <td class="py-2">DELETE</td>
+              <td>Deletes resources</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </div>
+  </div>
+</body>
+</html>

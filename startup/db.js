@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 
 const dbPassword = config.get("db_password");
 
+console.log(dbPassword);
+
 module.exports = function () {
   mongoose.connect(
     `mongodb+srv://biblo_admin:${dbPassword}@biblo.nnxdk.mongodb.net/biblo?retryWrites=true&w=majority`,

@@ -11,6 +11,11 @@ require("./startup/config")();
 require("./startup/validation")();
 require("./startup/prod")(app);
 
+app.set("views", "./views");
+app.set("view engine", "ejs");
+
+app.use(express.static("public"));
+
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
   winston.info("Morgan enabled...");
