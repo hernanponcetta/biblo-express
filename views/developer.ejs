@@ -38,90 +38,284 @@
       <li class="border-b py-3 pl-6">PUBLISHERS</li>
     </ul>
   </header>
-  <div class="container mx-auto">
-    <div class="p-6 text-gray-800">
-      <h1 class="pt-4 pb-10 text-5xl font-black subpixel-antialiased">Web API</h1>
-      <article class="text-sm leading-relaxed">
-        <p class="pb-3">
-          The motivation behind this project was to create a Web API to function as back end for Biblo online Bookstore.
-        </p>
-        <p class="pb-3">
-          It includes many features as:
-        </p>
-        <ul class="list-disc list-inside pb-3">
-          <li>User authentication</li>
-          <li>Schema validation</li>
-          <li>Password hashing</li>
-          <li>Unit and integration testing</li>
+  <div class="flex">
+    <aside class="hidden md:block py-6
+    pl-6 pr-20 bg-green-200 text-gray-800 subpixel-antialiased">
+      <nav>
+        <div class="font-bold py-6 pr-20">REFERENCE</div>
+        <ul>
+          <div>
+            <div class="py-2"><button id="users-button" class="font-semibold focus:outline-none">Users</button></div>
+            <div id="users-container" class="hidden pl-2">
+              <li>
+                <ul class="text-sm">
+                  <a href="">
+                    <li class="py-1">Get mutiple users</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Get single user</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Get single user by Id</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Create single user</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Update single user</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Delete single user</li>
+                  </a>
+                </ul>
+              </li>
+            </div>
+          </div>
+          <div>
+            <div class="py-2"><button id="books-button" class="font-semibold focus:outline-none">Books</button></div>
+            <div id="books-container" class="hidden pl-2">
+              <li class="text-sm">
+                <ul>
+                  <a href="">
+                    <li class="py-1">Get mutiple books</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Get single book by Id</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Create single book</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Update single book</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Delete single book</li>
+                  </a>
+                </ul>
+              </li>
+            </div>
+          </div>
+          <div>
+            <div class="py-2"><button id="genres-button" class="font-semibold focus:outline-none">Genres</button></div>
+            <div id="genres-container" class="hidden pl-2">
+              <li class="text-sm">
+                <ul>
+                  <a href="">
+                    <li class="py-1">Get mutiple genres</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Get single genre by Id</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Create single genre</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Update single genre</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Delete single genre</li>
+                  </a>
+                </ul>
+              </li>
+            </div>
+          </div>
+          <div>
+            <div class="py-2"><button id="authors-button" class="font-semibold focus:outline-none">Authors</button></div>
+            <div id="authors-container" class="hidden pl-2">
+              <li class="text-sm">
+                <ul>
+                  <a href="">
+                    <li class="py-1">Get mutiple authors</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Get single author by Id</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Create single author</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Update single author</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Delete single author</li>
+                  </a>
+                </ul>
+              </li>
+            </div>
+          </div>
+          <div>
+            <div class="py-2"><button id="publishers-button" class="font-semibold focus:outline-none">Publishers</button></div>
+            <div id="publishers-container" class="hidden pl-2">
+              <li class="text-sm">
+                <ul>
+                  <a href="">
+                    <li class="py-1">Get mutiple publishers</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Get single publisher by Id</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Create single publisher</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Update single publisher</li>
+                  </a>
+                  <a href="">
+                    <li class="py-1">Delete single publisher</li>
+                  </a>
+                </ul>
+              </li>
+            </div>
+          </div>
         </ul>
-        <p class="pb-3">
-          Based on simple REST principles, the Biblo Web API endpoints can return, create, update and delete resources from Biblo data base.
-        </p>
-        <p class="pb-3">
-          The base address of Web API is <a href="https://biblo-express.herokuapp.com/api" class="text-green-700">https://biblo-express.herokuapp.com/api</a>. The API provides a set of endpoints, each with its own unique path.
-        </p>
-        <p class="pb-3">
-          To perform certain tasks, such as acces users data, update or delete books, authors or geners, users must have administration rights. A Json Web Token is provided after user authentication including user rights.
-        </p>
-        <p class="pb-3">
-          To start using Biblo Web API I provide a <a href="#" class="text-green-700">Postman Colleccion</a> and a Dummy Admin so you can start exploring the API with full admin rights.
-        </p>
-        <p class="pb-3">
-          To obtain an authentication token you will need to send a POST request to <a href="https://biblo-express.herokuapp.com/api/auth" class="text-green-700">https://biblo-express.herokuapp.com/api/auth</a> with eMail and password in the request Body:
-        </p>
-        <div class="mb-3 pl-6 text-gray-600 bg-green-100">
-          <ul>
-            <li>{</li>
-            <li>"eMail": "dummyadmin@biblo.com",</li>
-            <li>"password": "12345"</li>
-            <li>}</li>
+      </nav>
+    </aside>
+    <div class="md:max-w-3xl">
+      <div class="p-6 text-gray-800">
+        <h1 class="pt-4 pb-10 text-5xl font-black subpixel-antialiased">Web API</h1>
+        <article class="text-sm leading-relaxed">
+          <p class="pb-3">
+            The motivation behind this project was to create a Web API to function as back end for Biblo online Bookstore.
+          </p>
+          <p class="pb-3">
+            It includes many features as:
+          </p>
+          <ul class="list-disc list-inside pb-3">
+            <li>User authentication</li>
+            <li>Schema validation</li>
+            <li>Password hashing</li>
+            <li>Unit and integration testing</li>
           </ul>
-        </div>
-        <p class="pb-3">
-          Then you will have to set <span class="text-gray-600 bg-green-100">x-auth-token: {{token}}</span> request header.
-        </p>
-      </article>
-      <article class="text-sm leading-relaxed text-gray-800">
-        <h2 class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Requests</h2>
-        <p class="pb-3">
-          The Biblo Web API is based on REST principles. Data resources are accessed via standard HTTPS requests to an API endpoint. Where possible, Web API uses appropriate HTTP verbs for each action:
-        </p>
-        <table>
-          <thead>
-            <tr class="border-b-2">
-              <th class="pr-6 py-2">METHOD</th>
-              <th class="text-left">ACTION</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="border-b">
-              <td class="py-2">GET</td>
-              <td>Retrieves resources or collections</td>
-            </tr>
-            <tr class="border-b">
-              <td class="py-2">POST</td>
-              <td>Creates resources</td>
-            </tr>
-            <tr class="border-b">
-              <td class="py-2">PUT</td>
-              <td>Changes and/or replaces resources</td>
-            </tr>
-            <tr>
-              <td class="py-2">DELETE</td>
-              <td>Deletes resources</td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
-      <article class="text-sm leading-relaxed text-gray-800">
-        <h2 class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Responses</h2>
-        <p>
-          Web API returns all response data as a JSON object
-        </p>
-      </article>
-      <article class="text-sm leading-relaxed text-gray-800">
-        <h2 id="users-api" class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Users API</h2>
-      </article>
+          <p class="pb-3">
+            Based on simple REST principles, the Biblo Web API endpoints can return, create, update and delete resources from Biblo data base.
+          </p>
+          <p class="pb-3">
+            The base address of Web API is <a href="https://biblo-express.herokuapp.com/api" class="text-green-700">https://biblo-express.herokuapp.com/api</a>. The API provides a set of endpoints, each with its own unique path.
+          </p>
+          <p class="pb-3">
+            To perform certain tasks, such as acces users data, update or delete books, authors or geners, users must have administration rights. A Json Web Token is provided after user authentication including user rights.
+          </p>
+          <p class="pb-3">
+            To start using Biblo Web API I provide a <a href="#" class="text-green-700">Postman Colleccion</a> and a Dummy Admin so you can start exploring the API with full admin rights.
+          </p>
+          <p class="pb-3">
+            To obtain an authentication token you will need to send a POST request to <a href="https://biblo-express.herokuapp.com/api/auth" class="text-green-700">https://biblo-express.herokuapp.com/api/auth</a> with eMail and password in the request Body:
+          </p>
+          <div class="mb-3 pl-6 text-gray-600 bg-green-100">
+            <ul>
+              <li>{</li>
+              <li>"eMail": "dummyadmin@biblo.com",</li>
+              <li>"password": "12345"</li>
+              <li>}</li>
+            </ul>
+          </div>
+          <p class="pb-3">
+            Then you will have to set <span class="text-gray-600 bg-green-100">x-auth-token: {{token}}</span> request header.
+          </p>
+        </article>
+        <article class="text-sm leading-relaxed text-gray-800">
+          <h2 class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Requests</h2>
+          <p class="pb-3">
+            The Biblo Web API is based on REST principles. Data resources are accessed via standard HTTPS requests to an API endpoint. Where possible, Web API uses appropriate HTTP verbs for each action:
+          </p>
+          <table>
+            <thead>
+              <tr class="border-b-2">
+                <th class="pr-6 py-2">METHOD</th>
+                <th class="text-left">ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b">
+                <td class="py-2">GET</td>
+                <td>Retrieves resources or collections</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2">POST</td>
+                <td>Creates resources</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2">PUT</td>
+                <td>Changes and/or replaces resources</td>
+              </tr>
+              <tr>
+                <td class="py-2">DELETE</td>
+                <td>Deletes resources</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+        <article class="text-sm leading-relaxed text-gray-800">
+          <h2 class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Responses</h2>
+          <p class="pb-3">
+            Web API returns all response data as a JSON object
+          </p>
+        </article>
+        <article class="text-sm leading-relaxed text-gray-800">
+          <h2 id="users-api" class="pt-4 pb-1 text-3xl font-black subpixel-antialiased">Users API</h2>
+          <a href="" class="text-green-700">Back to top</a>
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get multiple users</h3>
+          <p class="pb-3">
+            Get all Biblo users.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET: https://biblo-express.herokuapp.com/api/users</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key is "users" and whose value is an array of users objects in JSON format.
+          </p>
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get sigle user</h3>
+          <p class="pb-3">
+            Get a single Biblo user.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET: https://biblo-express.herokuapp.com/api/users/me</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key is "user" and whose value is a user object in JSON format.
+          </p>
+        </article>
+      </div>
     </div>
   </div>
 </body>

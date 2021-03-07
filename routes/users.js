@@ -13,11 +13,11 @@ const router = express.Router();
 router.get("/", [auth, admin], async (req, res) => {
   const users = await User.find();
 
-  res.send(
-    _.map(users, (user) => {
+  res.send({
+    users: _.map(users, (user) => {
       return _.pick(user, ["_id", "firstName", "lastName", "eMail", "isAdmin"]);
-    })
-  );
+    }),
+  });
 });
 
 //Single user create
@@ -59,14 +59,12 @@ router.post("/", async (req, res) => {
 router.put("/me", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error)
-    return res
-      .status(400)
-      .send({
-        error: {
-          status: 400,
-          message: "Bad Request - " + error.details[0].message,
-        },
-      });
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - " + error.details[0].message,
+      },
+    });
 
   user = _.pick(req.body, ["firstName", "lastName", "eMail", "password"]);
 
@@ -87,14 +85,12 @@ router.put("/me", auth, async (req, res) => {
 router.put("/:id", [auth, admin, validateId], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
-    return res
-      .status(400)
-      .send({
-        error: {
-          status: 400,
-          message: "Bad Request - " + error.details[0].message,
-        },
-      });
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - " + error.details[0].message,
+      },
+    });
 
   user = _.pick(req.body, [
     "firstName",
