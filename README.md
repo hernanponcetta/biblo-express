@@ -1,4 +1,4 @@
-# Biblo REST API
+# Biblo Web API
 
 The motivation behind this project was to create a Web API to function as back end for Biblo online Bookstore.
 
@@ -17,7 +17,7 @@ To perform certain tasks, such as acces users data, update or delete books, auth
 
 ## Technologies
 
-Project is created with:
+Project was created with:
 
 - Node.js
 - Express
