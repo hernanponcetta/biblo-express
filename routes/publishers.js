@@ -11,45 +11,41 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   const publishers = await Publisher.find();
 
-  res.send(
-    _.map(publishers, (publisher) => {
+  res.send({
+    publishers: _.map(publishers, (publisher) => {
       return _.pick(publisher, ["_id", "name"]);
-    })
-  );
+    }),
+  });
 });
 
 //Single publisher create
 router.post("/", [auth, admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
-    return res
-      .status(400)
-      .send({
-        error: {
-          status: 400,
-          message: "Bad Request - " + error.details[0].message,
-        },
-      });
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - " + error.details[0].message,
+      },
+    });
 
   const publisher = new Publisher({
     name: req.body.name,
   });
   await publisher.save();
-  res.send(_.pick(publisher, ["_id", "name"]));
+  res.send({ publisher: _.pick(publisher, ["_id", "name"]) });
 });
 
 //Single publisher update
 router.put("/:id", [auth, admin, validateId], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
-    return res
-      .status(400)
-      .send({
-        error: {
-          status: 400,
-          message: "Bad Request - " + error.details[0].message,
-        },
-      });
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - " + error.details[0].message,
+      },
+    });
 
   const publisher = await Publisher.findByIdAndUpdate(
     req.params.id,
@@ -65,7 +61,7 @@ router.put("/:id", [auth, admin, validateId], async (req, res) => {
         message: `Not Found - No publisher was found with ${req.params.id} Id`,
       },
     });
-  res.send(publisher);
+  res.send({ publisher: _.pick(publisher, ["_id", "name"]) });
 });
 
 //Single publisher delete
@@ -79,7 +75,7 @@ router.delete("/:id", [auth, admin, validateId], async (req, res) => {
       },
     });
 
-  res.send(_.pick(publisher, ["_id", "name"]));
+  res.send({ publisher: _.pick(publisher, ["_id", "name"]) });
 });
 
 //Single publisher lookup
@@ -94,7 +90,7 @@ router.get("/:id", validateId, async (req, res) => {
       },
     });
 
-  res.send(_.pick(publisher, ["_id", "name"]));
+  res.send({ publisher: _.pick(publisher, ["_id", "name"]) });
 });
 
 module.exports = router;

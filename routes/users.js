@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
 
   res
     .header("x-auth-token", token)
-    .send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
+    .send({ user: _.pick(user, ["_id", "firstName", "lastName", "eMail"]) });
 });
 
 //User update
@@ -78,7 +78,7 @@ router.put("/me", auth, async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Not Found - User not found" } });
 
-  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
+  res.send({ user: _.pick(user, ["_id", "firstName", "lastName", "eMail"]) });
 });
 
 //Single user update by Id
@@ -110,7 +110,7 @@ router.put("/:id", [auth, admin, validateId], async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Not Found - User not found" } });
 
-  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
+  res.send({ user: _.pick(user, ["_id", "firstName", "lastName", "eMail"]) });
 });
 
 //User delete
@@ -122,7 +122,7 @@ router.delete("/me", auth, async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Not Found - User not found" } });
 
-  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
+  res.send({ user: _.pick(user, ["_id", "firstName", "lastName", "eMail"]) });
 });
 
 //Single user delete by Id
@@ -146,7 +146,7 @@ router.get("/me", auth, async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Not Found - User not found" } });
 
-  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
+  res.send({ user: _.pick(user, ["_id", "firstName", "lastName", "eMail"]) });
 });
 
 //User lookup by Id
@@ -158,7 +158,7 @@ router.get("/:id", [auth, admin, validateId], async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Not Found - User not found" } });
 
-  res.send(_.pick(user, ["_id", "firstName", "lastName", "eMail"]));
+  res.send({ user: _.pick(user, ["_id", "firstName", "lastName", "eMail"]) });
 });
 
 module.exports = router;

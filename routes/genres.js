@@ -11,46 +11,42 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   const genres = await Genre.find();
 
-  res.send(
-    _.map(genres, (genre) => {
+  res.send({
+    genres: _.map(genres, (genre) => {
       return _.pick(genre, ["_id", "name"]);
-    })
-  );
+    }),
+  });
 });
 
 //Single genre create
 router.post("/", [auth, admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
-    return res
-      .status(400)
-      .send({
-        error: {
-          status: 400,
-          message: "Bad Request - " + error.details[0].message,
-        },
-      });
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - " + error.details[0].message,
+      },
+    });
 
   let genre = new Genre({
     name: req.body.name,
   });
 
   genre = await genre.save();
-  res.send(_.pick(genre, ["_id", "name"]));
+  res.send({ genre: _.pick(genre, ["_id", "name"]) });
 });
 
 //single genre update
 router.put("/:id", [auth, admin, validateId], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
-    return res
-      .status(400)
-      .send({
-        error: {
-          status: 400,
-          message: "Bad Request - " + error.details[0].message,
-        },
-      });
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - " + error.details[0].message,
+      },
+    });
 
   const genre = await Genre.findByIdAndUpdate(
     req.params.id,
@@ -68,7 +64,7 @@ router.put("/:id", [auth, admin, validateId], async (req, res) => {
       },
     });
 
-  res.send(_.pick(genre, ["_id,", "name"]));
+  res.send({ genre: _.pick(genre, ["_id,", "name"]) });
 });
 
 //Single genre delete
@@ -83,7 +79,7 @@ router.delete("/:id", [auth, admin, validateId], async (req, res) => {
       },
     });
 
-  res.send(_.pick(genre, ["_id", "name"]));
+  res.send({ genre: _.pick(genre, ["_id", "name"]) });
 });
 
 //Single genre lookup
@@ -98,7 +94,7 @@ router.get("/:id", validateId, async (req, res) => {
       },
     });
 
-  res.send(_.pick(genre, ["_id", "name"]));
+  res.send({ genre: _.pick(genre, ["_id", "name"]) });
 });
 
 module.exports = router;
