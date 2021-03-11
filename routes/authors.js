@@ -89,9 +89,16 @@ router.delete("/:id", [auth, admin, validateId], async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Author Id was not found" } });
 
-  res.send(
-    _.pick(author, ["_id", "name", "bio", "authorPhoto", "born", "death"])
-  );
+  res.send({
+    author: _.pick(author, [
+      "_id",
+      "name",
+      "bio",
+      "authorPhoto",
+      "born",
+      "death",
+    ]),
+  });
 });
 
 //Single author lookup
@@ -102,9 +109,16 @@ router.get("/:id", validateId, async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Author Id was not found" } });
 
-  res.send(
-    _.pick(author, ["_id", "name", "bio", "authorPhoto", "born", "death"])
-  );
+  res.send({
+    author: _.pick(author, [
+      "_id",
+      "name",
+      "bio",
+      "authorPhoto",
+      "born",
+      "death",
+    ]),
+  });
 });
 
 module.exports = router;

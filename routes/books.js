@@ -13,8 +13,8 @@ const router = express.Router();
 //Multiple books lookup
 router.get("/", async (req, res) => {
   const books = await Book.find();
-  res.send(
-    _.map(books, (book) => {
+  res.send({
+    books: _.map(books, (book) => {
       return _.pick(book, [
         "_id",
         "title",
@@ -27,22 +27,20 @@ router.get("/", async (req, res) => {
         "available",
         "bookCover",
       ]);
-    })
-  );
+    }),
+  });
 });
 
 //Single book create
 router.post("/", [auth, admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
-    return res
-      .status(400)
-      .send({
-        error: {
-          status: 400,
-          message: "Bad Request - " + error.details[0].message,
-        },
-      });
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - " + error.details[0].message,
+      },
+    });
 
   const genre = await Genre.findById(req.body.genreId);
   if (!genre)
@@ -93,8 +91,8 @@ router.post("/", [auth, admin], async (req, res) => {
   });
 
   await book.save();
-  res.send(
-    _.pick(book, [
+  res.send({
+    book: _.pick(book, [
       "_id",
       "title",
       "author",
@@ -105,22 +103,20 @@ router.post("/", [auth, admin], async (req, res) => {
       "isbn",
       "available",
       "bookCover",
-    ])
-  );
+    ]),
+  });
 });
 
 //Single book update
 router.put("/:id", [auth, admin, validateId], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
-    return res
-      .status(400)
-      .send({
-        error: {
-          status: 400,
-          message: "Bad Request - " + error.details[0].message,
-        },
-      });
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: "Bad Request - " + error.details[0].message,
+      },
+    });
 
   const genre = await Genre.findById(req.body.genreId);
   if (!genre)
@@ -182,8 +178,8 @@ router.put("/:id", [auth, admin, validateId], async (req, res) => {
       },
     });
 
-  res.send(
-    _.pick(book, [
+  res.send({
+    book: _.pick(book, [
       "_id",
       "title",
       "author",
@@ -194,8 +190,8 @@ router.put("/:id", [auth, admin, validateId], async (req, res) => {
       "isbn",
       "available",
       "bookCover",
-    ])
-  );
+    ]),
+  });
 });
 
 //Single book delete
@@ -210,8 +206,8 @@ router.delete("/:id", [auth, admin, validateId], async (req, res) => {
       },
     });
 
-  res.send(
-    _.pick(book, [
+  res.send({
+    book: _.pick(book, [
       "_id",
       "title",
       "author",
@@ -222,8 +218,8 @@ router.delete("/:id", [auth, admin, validateId], async (req, res) => {
       "isbn",
       "available",
       "bookCover",
-    ])
-  );
+    ]),
+  });
 });
 
 //Single book lookup
@@ -238,8 +234,8 @@ router.get("/:id", validateId, async (req, res) => {
       },
     });
 
-  res.send(
-    _.pick(book, [
+  res.send({
+    book: _.pick(book, [
       "_id",
       "title",
       "author",
@@ -250,8 +246,8 @@ router.get("/:id", validateId, async (req, res) => {
       "isbn",
       "available",
       "bookCover",
-    ])
-  );
+    ]),
+  });
 });
 
 module.exports = router;
