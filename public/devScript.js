@@ -8,12 +8,14 @@ const booksButton = document.getElementById("books-button");
 const genresButton = document.getElementById("genres-button");
 const authorsButton = document.getElementById("authors-button");
 const publishersButton = document.getElementById("publishers-button");
+const loginButton = document.getElementById("login-button");
 
 const usersContainer = document.getElementById("users-container");
 const booksContainer = document.getElementById("books-container");
 const genresContainer = document.getElementById("genres-container");
 const authorsContainer = document.getElementById("authors-container");
 const publishersContainer = document.getElementById("publishers-container");
+const loginContainer = document.getElementById("login-container");
 
 closeButton.addEventListener("click", (e) => {
   navItem.classList.toggle("hidden");
@@ -39,4 +41,8 @@ authorsButton.addEventListener("click", (e) => {
 
 publishersButton.addEventListener("click", (e) => {
   publishersContainer.classList.toggle("hidden");
+});
+
+loginButton.addEventListener("click", (e) => {
+  loginContainer.classList.toggle("hidden");
 });

@@ -10,8 +10,8 @@ const router = express.Router();
 //Multiple authors lookup
 router.get("/", async (req, res) => {
   const authors = await Author.find();
-  res.send(
-    _.map(authors, (author) => {
+  res.send({
+    authors: _.map(authors, (author) => {
       return _.pick(author, [
         "_id",
         "name",
@@ -20,8 +20,8 @@ router.get("/", async (req, res) => {
         "born",
         "death",
       ]);
-    })
-  );
+    }),
+  });
 });
 
 //Single author create
@@ -42,7 +42,7 @@ router.post("/", [auth, admin], async (req, res) => {
 
   await author.save();
 
-  res.send(author);
+  res.send({ author: author });
 });
 
 //Single author update by Id
@@ -69,9 +69,16 @@ router.put("/:id", [auth, admin, validateId], async (req, res) => {
       .status(404)
       .send({ error: { status: 404, message: "Author Id was not found" } });
 
-  res.send(
-    _.pick(author, ["_id", "name", "bio", "authorPhoto", "born", "death"])
-  );
+  res.send({
+    author: _.pick(author, [
+      "_id",
+      "name",
+      "bio",
+      "authorPhoto",
+      "born",
+      "death",
+    ]),
+  });
 });
 
 //Single author Delete

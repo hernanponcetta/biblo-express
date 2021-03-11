@@ -1,12 +1,15 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-  <script defer src="devScript.js"></script> 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  <script defer src="devScript.js"></script>
 </head>
+
 <body>
   <header class="bg-green-600">
     <div class="flex items-center justify-between">
@@ -18,54 +21,65 @@
           <span class="font-sans text-white text-3xl tracking-tighter subpixel-antialiased">for Developers</span>
         </div>
       </div>
-      <div class="px-10 text-3xl text-white"><button id="close-top-menu" class="focus:outline-none">
-        <span id="fa-bars" class="">
-          <i class="fas fa-bars"></i>
-        </span>
-        <span id="fa-times" class="hidden">
-          <i class="fas fa-times"></i>
-        </span>
-      </button>
+      <div class="px-10 text-3xl text-white md:hidden"><button id="close-top-menu" class="focus:outline-none">
+          <span id="fa-bars" class="">
+            <i class="fas fa-bars"></i>
+          </span>
+          <span id="fa-times" class="hidden">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
       </div>
     </div>
     <ul id="nav-item-container" class="text-white text-xl hidden">
       <a href="#users-api">
         <li class="border-t border-b py-3 pl-6">USERS</li>
       </a>
-      <li class="border-b py-3 pl-6">BOOKS</li>
-      <li class="border-b py-3 pl-6">AUTHORS</li>
-      <li class="border-b py-3 pl-6">GENRES</li>
-      <li class="border-b py-3 pl-6">PUBLISHERS</li>
+      <a href="#books-api">
+        <li class="border-b py-3 pl-6">BOOKS</li>
+      </a>
+      <a href="#authors-api">
+        <li class="border-b py-3 pl-6">AUTHORS</li>
+      </a>
+      <a href="#genres-api">
+        <li class="border-b py-3 pl-6">GENRES</li>
+      </a>
+      <a href="#publishers-api">
+        <li class="border-b py-3 pl-6">PUBLISHERS</li>
+      </a>
+      <a href="#login-api">
+        <li class="border-b py-3 pl-6">LOGIN</li>
+      </a>
     </ul>
   </header>
   <div class="flex">
-    <aside class="hidden md:block py-6
-    pl-6 pr-20 bg-green-200 text-gray-800 subpixel-antialiased">
+    <aside class="hidden sticky top-0 h-screen md:block py-6
+    pl-6  bg-green-200 text-gray-800 subpixel-antialiased">
       <nav>
-        <div class="font-bold py-6 pr-20">REFERENCE</div>
+        <div class="font-bold py-6 pr-24">REFERENCE</div>
         <ul>
           <div>
             <div class="py-2"><button id="users-button" class="font-semibold focus:outline-none">Users</button></div>
             <div id="users-container" class="hidden pl-2">
               <li>
                 <ul class="text-sm">
-                  <a href="">
-                    <li class="py-1">Get mutiple users</li>
+                  <a href="#get-multiple-users">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get mutiple users</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Get single user</li>
+                  <a href="#get-single-user">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get single user</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Get single user by Id</li>
+                  <a href="#get-single-user-id">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get single user by Id</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Create single user</li>
+                  <a href="#create-single-user">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Create single user</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Update single user</li>
+                  <a href="#update-single-user">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Update single user</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Delete single user</li>
+                  <a href="#delete-single-user">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Delete single user</span></li>
                   </a>
                 </ul>
               </li>
@@ -76,20 +90,20 @@
             <div id="books-container" class="hidden pl-2">
               <li class="text-sm">
                 <ul>
-                  <a href="">
-                    <li class="py-1">Get mutiple books</li>
+                  <a href="#get-multiple-books">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get mutiple books</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Get single book by Id</li>
+                  <a href="#get-single-book">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get single book</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Create single book</li>
+                  <a href="#create-single-book">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Create single book</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Update single book</li>
+                  <a href="#update-single-book">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Update single book</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Delete single book</li>
+                  <a href="#delete-single-book">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Delete single book</span></li>
                   </a>
                 </ul>
               </li>
@@ -100,68 +114,82 @@
             <div id="genres-container" class="hidden pl-2">
               <li class="text-sm">
                 <ul>
-                  <a href="">
-                    <li class="py-1">Get mutiple genres</li>
+                  <a href="#get-multiple-genres">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get mutiple genres</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Get single genre by Id</li>
+                  <a href="#get-single-genre">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get single genre</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Create single genre</li>
+                  <a href="#create-single-genre">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Create single genre</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Update single genre</li>
+                  <a href="#update-single-genre">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Update single genre</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Delete single genre</li>
+                  <a href="#delete-single-genre">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Delete single genre</span></li>
                   </a>
                 </ul>
               </li>
             </div>
           </div>
           <div>
-            <div class="py-2"><button id="authors-button" class="font-semibold focus:outline-none">Authors</button></div>
+            <div class="py-2"><button id="authors-button" class="font-semibold focus:outline-none">Authors</button>
+            </div>
             <div id="authors-container" class="hidden pl-2">
               <li class="text-sm">
                 <ul>
-                  <a href="">
-                    <li class="py-1">Get mutiple authors</li>
+                  <a href="#get-multiple-authors">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get mutiple authors</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Get single author by Id</li>
+                  <a href="#get-single-author">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get single author</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Create single author</li>
+                  <a href="#create-single-author">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Create single author</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Update single author</li>
+                  <a href="#update-single-author">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Update single author</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Delete single author</li>
+                  <a href="#delete-single-author">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Delete single author</span></li>
                   </a>
                 </ul>
               </li>
             </div>
           </div>
           <div>
-            <div class="py-2"><button id="publishers-button" class="font-semibold focus:outline-none">Publishers</button></div>
+            <div class="py-2"><button id="publishers-button"
+                class="font-semibold focus:outline-none">Publishers</button></div>
             <div id="publishers-container" class="hidden pl-2">
               <li class="text-sm">
                 <ul>
-                  <a href="">
-                    <li class="py-1">Get mutiple publishers</li>
+                  <a href="#get-multiple-publishers">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get mutiple publishers</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Get single publisher by Id</li>
+                  <a href="#get-single-publisher">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Get single publisher</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Create single publisher</li>
+                  <a href="#create-single-publisher">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Create single publisher</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Update single publisher</li>
+                  <a href="#update-single-publisher">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Update single publisher</span></li>
                   </a>
-                  <a href="">
-                    <li class="py-1">Delete single publisher</li>
+                  <a href="#delete-single-publisher">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">Delete single publisher</span></li>
+                  </a>
+                </ul>
+              </li>
+            </div>
+          </div>
+          <div>
+            <div class="py-2"><button id="login-button" class="font-semibold focus:outline-none">Login</button></div>
+            <div id="login-container" class="hidden pl-2">
+              <li class="text-sm">
+                <ul>
+                  <a href="#user-login">
+                    <li class="py-1"><span class="p-1 rounded-sm hover:bg-green-300">User login</span></li>
                   </a>
                 </ul>
               </li>
@@ -170,93 +198,104 @@
         </ul>
       </nav>
     </aside>
-    <div class="md:max-w-3xl">
-      <div class="p-6 text-gray-800">
-        <h1 class="pt-4 pb-10 text-5xl font-black subpixel-antialiased">Web API</h1>
-        <article class="text-sm leading-relaxed">
-          <p class="pb-3">
-            The motivation behind this project was to create a Web API to function as back end for Biblo online Bookstore.
-          </p>
-          <p class="pb-3">
-            It includes many features as:
-          </p>
-          <ul class="list-disc list-inside pb-3">
-            <li>User authentication</li>
-            <li>Schema validation</li>
-            <li>Password hashing</li>
-            <li>Unit and integration testing</li>
+    <div class="p-6 text-gray-800 md:max-w-3xl md:pl-10">
+      <h1 class=" pt-4 pb-10 text-5xl font-black subpixel-antialiased">Web API</h1>
+      <article class="text-sm leading-relaxed">
+        <p class="pb-3">
+          The motivation behind this project was to create a Web API to function as back end for Biblo online
+          Bookstore.
+        </p>
+        <p class="pb-3">
+          It includes many features as:
+        </p>
+        <ul class="list-disc list-inside pb-3">
+          <li>User authentication</li>
+          <li>Schema validation</li>
+          <li>Password hashing</li>
+          <li>Unit and integration testing</li>
+        </ul>
+        <p class="pb-3">
+          Based on simple REST principles, the Biblo Web API endpoints can return, create, update and delete resources
+          from Biblo data base.
+        </p>
+        <p class="pb-3">
+          The base address of Web API is <a href="https://biblo-express.herokuapp.com/api"
+            class="text-green-700">https://biblo-express.herokuapp.com/api</a>. The API provides a set of endpoints,
+          each with its own unique path.
+        </p>
+        <p class="pb-3">
+          To perform certain tasks, such as acces users data, update or delete books, authors or geners, users must
+          have administration rights. A Json Web Token is provided after user authentication including user rights.
+        </p>
+        <p class="pb-3">
+          To start using Biblo Web API I provide a <a href="#" class="text-green-700">Postman Colleccion</a> and a
+          Dummy Admin so you can start exploring the API with full admin rights.
+        </p>
+        <p class="pb-3">
+          To obtain an authentication token you will need to send a POST request to <a
+            href="https://biblo-express.herokuapp.com/api/auth"
+            class="text-green-700">https://biblo-express.herokuapp.com/api/auth</a> with eMail and password in the
+          request Body:
+        </p>
+        <div class="mb-3 pl-6 text-gray-600 bg-green-100">
+          <ul>
+            <li>{</li>
+            <li>"eMail": "dummyadmin@biblo.com",</li>
+            <li>"password": "12345"</li>
+            <li>}</li>
           </ul>
-          <p class="pb-3">
-            Based on simple REST principles, the Biblo Web API endpoints can return, create, update and delete resources from Biblo data base.
-          </p>
-          <p class="pb-3">
-            The base address of Web API is <a href="https://biblo-express.herokuapp.com/api" class="text-green-700">https://biblo-express.herokuapp.com/api</a>. The API provides a set of endpoints, each with its own unique path.
-          </p>
-          <p class="pb-3">
-            To perform certain tasks, such as acces users data, update or delete books, authors or geners, users must have administration rights. A Json Web Token is provided after user authentication including user rights.
-          </p>
-          <p class="pb-3">
-            To start using Biblo Web API I provide a <a href="#" class="text-green-700">Postman Colleccion</a> and a Dummy Admin so you can start exploring the API with full admin rights.
-          </p>
-          <p class="pb-3">
-            To obtain an authentication token you will need to send a POST request to <a href="https://biblo-express.herokuapp.com/api/auth" class="text-green-700">https://biblo-express.herokuapp.com/api/auth</a> with eMail and password in the request Body:
-          </p>
-          <div class="mb-3 pl-6 text-gray-600 bg-green-100">
-            <ul>
-              <li>{</li>
-              <li>"eMail": "dummyadmin@biblo.com",</li>
-              <li>"password": "12345"</li>
-              <li>}</li>
-            </ul>
-          </div>
-          <p class="pb-3">
-            Then you will have to set <span class="text-gray-600 bg-green-100">x-auth-token: {{token}}</span> request header.
-          </p>
-        </article>
-        <article class="text-sm leading-relaxed text-gray-800">
-          <h2 class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Requests</h2>
-          <p class="pb-3">
-            The Biblo Web API is based on REST principles. Data resources are accessed via standard HTTPS requests to an API endpoint. Where possible, Web API uses appropriate HTTP verbs for each action:
-          </p>
-          <table>
-            <thead>
-              <tr class="border-b-2">
-                <th class="pr-6 py-2">METHOD</th>
-                <th class="text-left">ACTION</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b">
-                <td class="py-2">GET</td>
-                <td>Retrieves resources or collections</td>
-              </tr>
-              <tr class="border-b">
-                <td class="py-2">POST</td>
-                <td>Creates resources</td>
-              </tr>
-              <tr class="border-b">
-                <td class="py-2">PUT</td>
-                <td>Changes and/or replaces resources</td>
-              </tr>
-              <tr>
-                <td class="py-2">DELETE</td>
-                <td>Deletes resources</td>
-              </tr>
-            </tbody>
-          </table>
-        </article>
-        <article class="text-sm leading-relaxed text-gray-800">
-          <h2 class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Responses</h2>
-          <p class="pb-3">
-            Web API returns all response data as a JSON object
-          </p>
-        </article>
-        <article class="text-sm leading-relaxed text-gray-800">
-          <h2 id="users-api" class="pt-4 pb-1 text-3xl font-black subpixel-antialiased">Users API</h2>
-          <a href="" class="text-green-700">Back to top</a>
+        </div>
+        <p class="pb-3">
+          Then you will have to set <span class="text-gray-600 bg-green-100">x-auth-token: {{token}}</span> request
+          header.
+        </p>
+      </article>
+      <article class="text-sm leading-relaxed text-gray-800">
+        <h2 class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Requests</h2>
+        <p class="pb-3">
+          The Biblo Web API is based on REST principles. Data resources are accessed via standard HTTPS requests to an
+          API endpoint. Where possible, Web API uses appropriate HTTP verbs for each action:
+        </p>
+        <table>
+          <thead>
+            <tr class="border-b-2">
+              <th class="pr-6 py-2">METHOD</th>
+              <th class="text-left">ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b">
+              <td class="py-2">GET</td>
+              <td>Retrieves resources or collections</td>
+            </tr>
+            <tr class="border-b">
+              <td class="py-2">POST</td>
+              <td>Creates resources</td>
+            </tr>
+            <tr class="border-b">
+              <td class="py-2">PUT</td>
+              <td>Changes and/or replaces resources</td>
+            </tr>
+            <tr>
+              <td class="py-2">DELETE</td>
+              <td>Deletes resources</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+      <article class="text-sm leading-relaxed text-gray-800">
+        <h2 class="pt-4 pb-6 text-3xl font-black subpixel-antialiased">Responses</h2>
+        <p class="pb-3">
+          Web API returns all response data as a JSON object
+        </p>
+      </article>
+      <article id="users-api" class="text-sm leading-relaxed text-gray-800">
+        <h2 class="pt-4 pb-1 text-3xl font-black subpixel-antialiased">Users API</h2>
+        <a href="" class="text-green-700">Back to top</a>
+        <div id="get-multiple-users">
           <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get multiple users</h3>
           <p class="pb-3">
-            Get all Biblo users.
+            Gets all Biblo users.
           </p>
           <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
           <p class="pb-3">
@@ -280,13 +319,17 @@
               </tr>
             </tbody>
           </table>
-          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
           <p class="pb-3">
-            On success, the HTTP status code in the response header is <span class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key is "users" and whose value is an array of users objects in JSON format.
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "users" and whose value is an array of users objects in JSON format.
           </p>
+        </div>
+        <div id="get-single-user">
           <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get sigle user</h3>
           <p class="pb-3">
-            Get a single Biblo user.
+            Gets a single Biblo user.
           </p>
           <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
           <p class="pb-3">
@@ -310,13 +353,1336 @@
               </tr>
             </tbody>
           </table>
-          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
           <p class="pb-3">
-            On success, the HTTP status code in the response header is <span class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key is "user" and whose value is a user object in JSON format.
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "user" and whose value is a user object in JSON format.
           </p>
-        </article>
-      </div>
+        </div>
+        <div id="get-single-user-id">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get sigle user by Id</h3>
+          <p class="pb-3">
+            Gets a single Biblo user by Id.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET:
+              https://biblo-express.herokuapp.com/api/users/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid user Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "user" and whose value is a user object in JSON format.
+          </p>
+        </div>
+        <div id="create-single-user">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Create sigle user</h3>
+          <p class="pb-3">
+            Creates a single user.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">POST:
+              https://biblo-express.herokuapp.com/api/users</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"firstName": "a valid first name"</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"lastName": "a valid last name"</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"eMail": "a valid email"</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"password": "a valid password"</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid user object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "user" and whose value is a user object in JSON format.
+          </p>
+        </div>
+        <div id="update-single-user">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Update sigle user</h3>
+          <p class="pb-3">
+            Updates a single user.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">PUT:
+              https://biblo-express.herokuapp.com/api/users/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid user Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"firstName": "a valid first name"</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"lastName": "a valid last name"</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"eMail": "a valid email"</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"password": "a valid password"</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid user object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "user" and whose value is a user object in JSON format.
+          </p>
+        </div>
+        <div id="delete-single-user">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Delete sigle user</h3>
+          <p class="pb-3">
+            Deletes a single user.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">DELETE:
+              https://biblo-express.herokuapp.com/api/users/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid user Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "user" and whose value is a user object in JSON format.
+          </p>
+        </div>
+      </article>
+      <article id="books-api" class="text-sm leading-relaxed text-gray-800">
+        <h2 id="users-api" class="pt-4 pb-1 text-3xl font-black subpixel-antialiased">Books API</h2>
+        <a href="" class="text-green-700">Back to top</a>
+        <div id="get-multiple-books">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get multiple books</h3>
+          <p class="pb-3">
+            Gets all Biblo books.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET: https://biblo-express.herokuapp.com/api/books</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "books" and whose value is an array of books objects in JSON format.
+          </p>
+        </div>
+        <div id="get-single-book">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get sigle book</h3>
+          <p class="pb-3">
+            Gets a single book.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET:
+              https://biblo-express.herokuapp.com/api/books/{id}</span>
+          </p>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid book Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "book" and whose value is a book object in JSON format.
+          </p>
+        </div>
+        <div id="create-single-book">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Create sigle book</h3>
+          <p class="pb-3">
+            Creates a single book.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">POST:
+              https://biblo-express.herokuapp.com/api/books</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"title": "a valid book title",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"authorId": "a valid author id",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"price": "a valid book price",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"itemStock": "a valid item stock number",</span>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"genreId": "a valid genre id",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"isbn": "a valid isbn",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"available": "true or false value",</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid user object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "book" and whose value is a book object in JSON format.
+          </p>
+        </div>
+        <div id="update-single-book">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Update sigle book</h3>
+          <p class="pb-3">
+            Updates a single book.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">PUT:
+              https://biblo-express.herokuapp.com/api/books/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid book Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"title": "a valid book title",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"authorId": "a valid author id",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"price": "a valid book price",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"itemStock": "a valid item stock number",</span>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"genreId": "a valid genre id",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"isbn": "a valid isbn",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"available": "true or false value",</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid user object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "book" and whose value is a book object in JSON format.
+          </p>
+        </div>
+        <div id="delete-single-book">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Delete sigle Book</h3>
+          <p class="pb-3">
+            Deletes a single book.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">DELETE:
+              https://biblo-express.herokuapp.com/api/books/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid book Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "book" and whose value is a book object in JSON format.
+          </p>
+        </div>
+      </article>
+      <article id="genres-api" class="text-sm leading-relaxed text-gray-800">
+        <h2 id="genres-api" class="pt-4 pb-1 text-3xl font-black subpixel-antialiased">Genres API</h2>
+        <a href="" class="text-green-700">Back to top</a>
+        <div id="get-multiple-genres">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get multiple genres</h3>
+          <p class="pb-3">
+            Gets all Genres.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET: https://biblo-express.herokuapp.com/api/genres</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "genres" and whose value is an array of genres objects in JSON format.
+          </p>
+        </div>
+        <div id="get-single-genre">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get sigle genre</h3>
+          <p class="pb-3">
+            Gets a single genre.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET:
+              https://biblo-express.herokuapp.com/api/genres/{id}</span>
+          </p>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid genre Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "genre" and whose value is a genre object in JSON format.
+          </p>
+        </div>
+        <div id="create-single-genre">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Create sigle genre</h3>
+          <p class="pb-3">
+            Creates a single genre.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">POST:
+              https://biblo-express.herokuapp.com/api/genres</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"genre": "a valid genre name",</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid user object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "book" and whose value is a book object in JSON format.
+          </p>
+        </div>
+        <div id="update-single-genre">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Update sigle genre</h3>
+          <p class="pb-3">
+            Updates a single book.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">PUT:
+              https://biblo-express.herokuapp.com/api/genre/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid genre Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"name": "a valid genre name",</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid user object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "genre" and whose value is a genre object in JSON format.
+          </p>
+        </div>
+        <div id="delete-single-genre">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Delete sigle genre</h3>
+          <p class="pb-3">
+            Deletes a single genre.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">DELETE:
+              https://biblo-express.herokuapp.com/api/genres/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid genre Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "genre" and whose value is a genre object in JSON format.
+          </p>
+        </div>
+      </article>
+      <article id="authors-api" class="text-sm leading-relaxed text-gray-800">
+        <h2 id="authors-api" class="pt-4 pb-1 text-3xl font-black subpixel-antialiased">Authors API</h2>
+        <a href="" class="text-green-700">Back to top</a>
+        <div id="get-multiple-authors">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get multiple authors</h3>
+          <p class="pb-3">
+            Gets all authors.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET: https://biblo-express.herokuapp.com/api/authors</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "authors" and whose value is an array of authors objects in JSON format.
+          </p>
+        </div>
+        <div id="get-single-author">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get sigle author</h3>
+          <p class="pb-3">
+            Gets a single author.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET:
+              https://biblo-express.herokuapp.com/api/authors/{id}</span>
+          </p>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid author Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "author" and whose value is a author object in JSON format.
+          </p>
+        </div>
+        <div id="create-single-author">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Create sigle author</h3>
+          <p class="pb-3">
+            Creates a single author.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">POST:
+              https://biblo-express.herokuapp.com/api/authors</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"name": "a valid author name",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"bio": "a valid author bio",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"authorPhoto": "a valid author photo name",</span>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"born": "a valid author born date",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"death": "a valid author death date",</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid author object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "author" and whose value is a author object in JSON format.
+          </p>
+        </div>
+        <div id="update-single-author">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Update sigle author</h3>
+          <p class="pb-3">
+            Updates a single author.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">PUT:
+              https://biblo-express.herokuapp.com/api/authors/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid author Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"name": "a valid author name",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"bio": "a valid author bio",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"authorPhoto": "a valid author photo name",</span>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"born": "a valid author born date",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"death": "a valid author death date",</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid author object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "author" and whose value is a author object in JSON format.
+          </p>
+        </div>
+        <div id="delete-single-author">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Delete sigle author</h3>
+          <p class="pb-3">
+            Deletes a single author.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">DELETE:
+              https://biblo-express.herokuapp.com/api/authors/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid author Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "author" and whose value is a author object in JSON format.
+          </p>
+        </div>
+      </article>
+      <article id="publishers-api" class="text-sm leading-relaxed text-gray-800">
+        <h2 id="authors-api" class="pt-4 pb-1 text-3xl font-black subpixel-antialiased">Publishers API</h2>
+        <a href="" class="text-green-700">Back to top</a>
+        <div id="get-multiple-publishers">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get multiple publishers</h3>
+          <p class="pb-3">
+            Gets all publishers.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET: https://biblo-express.herokuapp.com/api/publishers</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "publishers" and whose value is an array of publishers objects in JSON format.
+          </p>
+        </div>
+        <div id="get-single-publisher">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Get sigle publisher</h3>
+          <p class="pb-3">
+            Gets a single publisher.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">GET:
+              https://biblo-express.herokuapp.com/api/publishers/{id}</span>
+          </p>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid publisher Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "publisher" and whose value is a publisher object in JSON format.
+          </p>
+        </div>
+        <div id="create-single-publisher">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Create sigle publisher</h3>
+          <p class="pb-3">
+            Creates a single publisher.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">POST:
+              https://biblo-express.herokuapp.com/api/authors</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"name": "a valid publisher name",</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid author object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "publisher" and whose value is a publisher object in JSON format.
+          </p>
+        </div>
+        <div id="update-single-publisher">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Update sigle publisher</h3>
+          <p class="pb-3">
+            Updates a single publisher.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">PUT:
+              https://biblo-express.herokuapp.com/api/publishers/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid author Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"name": "a valid publisher name",</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid author object.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "publisher" and whose value is a publisher object in JSON format.
+          </p>
+        </div>
+        <div id="delete-single-publisher">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">Delete sigle publisher</h3>
+          <p class="pb-3">
+            Deletes a single publisher.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">DELETE:
+              https://biblo-express.herokuapp.com/api/publishers/{id}</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">HEADER</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2"><span class="mb-3 text-gray-600 bg-green-100 py-2">x-auth-token</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid acces token, authenticated user must have administration rights.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">PARAMS</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 "><span class="mb-3 text-gray-600 bg-green-100 py-2">{id}</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td class="text-xs">A valid publisher Id.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "publisher" and whose value is a publisher object in JSON format.
+          </p>
+        </div>
+      </article>
+      <article id="login-api" class="text-sm leading-relaxed text-gray-800">
+        <h2 class="pt-4 pb-1 text-3xl font-black subpixel-antialiased">Login</h2>
+        <a href="" class="text-green-700">Back to top</a>
+        <div id="user-login">
+          <h3 class="pt-4 pb-6 text-2xl font-black subpixel-antialiased">User login</h3>
+          <p class="pb-3">
+            Logins a single user.
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Endpoint URL</h4>
+          <p class="pb-3">
+            <span class="mb-3 text-gray-600 bg-green-100">POST:
+              https://biblo-express.herokuapp.com/api/auth</span>
+          </p>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Request</h4>
+          <table class="w-full mb-3">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-sm font-normal py-2 text-left w-full">BODY</th>
+                <th class="text-sm font-normal text-left pr-6">REQUIRED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">{</span></td>
+                <td class="font-bold">Required</td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"eMail": "a valid user email",</span></td>
+              </tr>
+              <tr>
+                <td><span class="mb-3 text-gray-600 bg-green-100">"password": "a valid user password",</span></td>
+              </tr>
+              <tr>
+                <td class="text-xs pb-2"><span class="text-gray-600 bg-green-100">}</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="pt-4 pb-6 text-sm font-black subpixel-antialiased">Response</h4>
+          <p class="pb-3">
+            On success, the HTTP status code in the response header is <span
+              class="mb-3 text-gray-600 bg-green-100">200</span> OK and the response body contains an object whose key
+            is "x-auth-token" and whose value is a Json Web Token.
+          </p>
+        </div>
+      </article>
     </div>
   </div>
 </body>
+
 </html>
