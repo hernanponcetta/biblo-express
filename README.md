@@ -1,6 +1,6 @@
 # Biblo Web API
 
-The motivation behind this project was to create a Web API to function as back end for Biblo online Bookstore.
+Backend repo for Biblo online Bookstore.
 
 It includes many features as:
 
